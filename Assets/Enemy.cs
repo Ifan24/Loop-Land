@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private float attackCountdown = 0;
     private bool isActive;
     public float damage = 10.0f;
+    public GameObject deathEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +26,10 @@ public class Enemy : MonoBehaviour
         }
     }
     private void Die() {
-        // TODO: Effect
-    
+        // instantiate Effect and destroy it after 5 sec
+        Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity), 5);
         // drop card
         DropCard();
-        
         
         Destroy(gameObject);
     }
