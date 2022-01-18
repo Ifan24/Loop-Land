@@ -11,7 +11,7 @@ public class Ground : MonoBehaviour
     private Renderer rd;
     private GameObject turret;
     private BuildManager buildManager;
-    
+    public GameObject buildEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +44,10 @@ public class Ground : MonoBehaviour
         }
         GameObject turretToBuild = buildManager.GetTurretToBuild();
         if (turretToBuild != null) {
-            turret = (GameObject) Instantiate(turretToBuild, transform.position + offset, transform.rotation);
+            turret = (GameObject) Instantiate(turretToBuild, GetBuildPosition(), transform.rotation);
+            GameObject effectGO = Instantiate(buildEffect, GetBuildPosition(), Quaternion.identity) as GameObject;
+            Destroy(effectGO, 5);
+            
             return true;
         }
         return false;

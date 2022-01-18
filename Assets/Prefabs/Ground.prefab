@@ -111,3 +111,4 @@ MonoBehaviour:
   hoverColor: {r: 1, g: 0.8919718, b: 0.6556604, a: 1}
   warningColor: {r: 1, g: 0.3066038, b: 0.3066038, a: 0}
   offset: {x: 0, y: 0.7, z: 0}
+  buildEffect: {fileID: 2160603246491354621, guid: c377ee792e2b40d4aa6e8912c3e0f17f, type: 3}
