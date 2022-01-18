@@ -56,9 +56,13 @@ public class PlayerController : MonoBehaviour
         }
         target = Waypoints.waypoints[waypointsIdx];
     }
-    private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Enemy")) {
             activeEnemies.Add(other.gameObject);
+            Enemy e = other.gameObject.GetComponent<Enemy>();
+            if (e != null) {
+                e.SetActive(true);
+            }
         }
     }
 }

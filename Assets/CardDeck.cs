@@ -22,6 +22,6 @@ public class CardDeck : MonoBehaviour
     // then call this method and use the public prefab to add card to deck
     public void addCardToDeck(GameObject cardPrefab) {
         GameObject obj = Instantiate(cardPrefab) as GameObject;
-        obj.transform.parent = transform;
+        obj.transform.SetParent(transform);
     }
 }
