@@ -19,7 +19,7 @@ public class Turret : MonoBehaviour, Building
     public float turnSmoothness = 10f;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    
+    public GameObject activeIndicator;
     void Start()
     {
         originalRange = range;
@@ -41,8 +41,11 @@ public class Turret : MonoBehaviour, Building
     {
         if (target == null) {
             //TODO: random rotate the head
+            activeIndicator.SetActive(false);
             return;
         }
+        // effect to show the turret is active
+        activeIndicator.SetActive(true);
         Vector3 dir = target.transform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Slerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSmoothness).eulerAngles;
@@ -62,14 +65,11 @@ public class Turret : MonoBehaviour, Building
     }
     
     void attack() {
-        
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, bulletPrefab.transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null) {
             bullet.SetTarget(target);
         }
-        // if destory the target too soon it will cause the rotation to look wired
-        // Destroy(target);
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
