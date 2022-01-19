@@ -14,15 +14,13 @@ public class CameraController : MonoBehaviour
     public float zRange = 5.0f;
     
     private bool disableMovement = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.isGameOver) {
+            this.enabled = false;
+        }
         // disable camera movement when press escape key
         if (Input.GetKeyDown(KeyCode.Escape)) {
             disableMovement = !disableMovement;

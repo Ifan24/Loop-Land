@@ -48,13 +48,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 8
-  fireRate: 0.25
   awakeFrequency: 0.3
   partToRotate: {fileID: 8329575352910963264}
   turnSmoothness: 10
+  activeIndicator: {fileID: 6612871722608359290}
+  heightOffset: {x: 0, y: 0.75, z: 0}
   bulletPrefab: {fileID: 8175326497527802106, guid: 77532b5d3c0df1c48becc78811d13dd5, type: 3}
   firePoint: {fileID: 2823098480031418075}
-  activeIndicator: {fileID: 6612871722608359290}
+  fireRate: 0.25
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  laserEffect: {fileID: 0}
 --- !u!1 &950775213610859886
 GameObject:
   m_ObjectHideFlags: 0

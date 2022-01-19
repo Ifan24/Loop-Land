@@ -6,7 +6,7 @@ public class Ground : MonoBehaviour
 {
     public Color hoverColor;
     public Color warningColor;
-    public Vector3 offset;
+    private Vector3 offset;
     private Color defaultColor;
     private Renderer rd;
     private GameObject turret;
@@ -19,31 +19,14 @@ public class Ground : MonoBehaviour
         defaultColor = rd.material.color;
         buildManager = BuildManager.instance;
     }
-
-    // private void OnMouseDown() {
-    //     if (EventSystem.current.IsPointerOverGameObject()) {
-    //         return;
-    //     }
-    //     if (turret != null) {
-    //         // TODO: do something if the click ground already has building
-    //         return;
-    //     }
-    //     GameObject turretToBuild = buildManager.GetTurretToBuild();
-    //     if (turretToBuild != null) {
-    //         turret = (GameObject) Instantiate(turretToBuild, transform.position + offset, transform.rotation);
-    //     }
-    // }
     
     public bool PlaceBuilding() {
-        if (EventSystem.current.IsPointerOverGameObject()) {
-            return false;
-        }
-        if (turret != null) {
-            // TODO: do something if the click ground already has building
+        if (EventSystem.current.IsPointerOverGameObject() || turret != null) {
             return false;
         }
         GameObject turretToBuild = buildManager.GetTurretToBuild();
         if (turretToBuild != null) {
+            offset = turretToBuild.GetComponent<Turret>().heightOffset;
             turret = (GameObject) Instantiate(turretToBuild, GetBuildPosition(), transform.rotation);
             GameObject effectGO = Instantiate(buildEffect, GetBuildPosition(), Quaternion.identity) as GameObject;
             Destroy(effectGO, 5);

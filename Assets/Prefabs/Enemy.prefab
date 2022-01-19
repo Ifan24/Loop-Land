@@ -59,10 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8b26ff33b972646ab1741c6a0fd211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   standardTurretDropRate: 0.5
   missileLauncherDropRate: 0.2
-  attackFrequency: 1
+  laserBeamerDropRate: 0.2
+  health: 100
+  originalAttackFrequency: 0.25
   damage: 10
   deathEffect: {fileID: 3906030164205266553, guid: eb2fe3679e2038748a23d2d36c99dfcb, type: 3}
 --- !u!1 &6053541318330447633

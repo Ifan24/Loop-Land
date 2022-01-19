@@ -6,6 +6,7 @@ public class CardDeck : MonoBehaviour
 {
     public GameObject standardTurretCardPrefab;
     public GameObject missileLauncherCardPrefab;
+    public GameObject laserBeamerCardPrefab;
     
     public static CardDeck instance;
     private void Awake() {
