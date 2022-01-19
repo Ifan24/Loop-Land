@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject gamePauseUI;
+    private float gameSpeed;
     public static GameManager instance;
     public static bool isGameOver;
     private void Awake() {
@@ -19,11 +19,27 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         isGameOver = false;
+        gameSpeed = 1;
     }
     private void Update() {
-        // if (Input.GetKeyDown(KeyCode.E)) {
-        //     GameOver();
-        // }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
+            ToggleMenu();
+        }
+    }
+    
+    public void ToggleMenu() {
+        gamePauseUI.SetActive( !gamePauseUI.activeSelf );
+        
+        if (gamePauseUI.activeSelf) {
+            Time.timeScale = 0;
+        }
+        else {
+            Time.timeScale = gameSpeed;
+        }
+    }
+    public void ChangeGameSpeed(float _gameSpeed) {
+        gameSpeed = _gameSpeed;
+        Time.timeScale = gameSpeed;
     }
     public void GameOver() {
         if (isGameOver) return;
@@ -33,6 +49,7 @@ public class GameManager : MonoBehaviour
     
     public void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = gameSpeed;
     }
     
     public void Menu () {

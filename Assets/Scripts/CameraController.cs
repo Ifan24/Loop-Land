@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
         if (GameManager.isGameOver) {
             this.enabled = false;
         }
-        // disable camera movement when press escape key
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        // disable camera movement when press tab key
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             disableMovement = !disableMovement;
         }
         if (disableMovement) return;
