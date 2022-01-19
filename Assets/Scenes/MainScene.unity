@@ -40770,6 +40770,7 @@ MonoBehaviour:
   standardTurretCardPrefab: {fileID: 2781485861123962042, guid: fcf29eab3567de946941c60d6e960b20, type: 3}
   missileLauncherCardPrefab: {fileID: 2781485861123962042, guid: 59e1e4469f01a7344bc5a87922d461ae, type: 3}
   laserBeamerCardPrefab: {fileID: 7806454467364444463, guid: 940585c081550b14789603bda34d5e31, type: 3}
+  destroyCardPrefab: {fileID: 4534533912209313207, guid: 1981a86aac365a34dae75b566722bef5, type: 3}
 --- !u!1001 &1852109376
 PrefabInstance:
   m_ObjectHideFlags: 0
