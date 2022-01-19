@@ -12,6 +12,8 @@ public class Ground : MonoBehaviour
     private GameObject turret;
     private BuildManager buildManager;
     public GameObject buildEffect;
+    public GameObject destroyEffect;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,7 @@ public class Ground : MonoBehaviour
     public bool DestoryBuildingOnTop() {
         if (turret != null) {
             Destroy(turret);
+            Destroy(Instantiate(destroyEffect, GetBuildPosition(), Quaternion.identity), 5);
             return true;
         }
         return false;
