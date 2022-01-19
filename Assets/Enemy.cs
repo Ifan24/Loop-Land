@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public float standardTurretDropRate = 0.05f;
     public float missileLauncherDropRate = 0.02f;
     public float laserBeamerDropRate = 0.02f;
+    public float destroyCardDropRate = 0.2f;
+    
     
     [Header("Enemy stats")]
     public float health;
@@ -59,6 +61,9 @@ public class Enemy : MonoBehaviour
         }
         if (Random.Range(0, 1.0f) <= laserBeamerDropRate) {
             cd.addCardToDeck(cd.laserBeamerCardPrefab);
+        }
+        if (Random.Range(0, 1.0f) <= destroyCardDropRate) {
+            cd.addCardToDeck(cd.destroyCardPrefab);
         }
     }
     // Update is called once per frame

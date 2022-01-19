@@ -7,6 +7,8 @@ public class CardDeck : MonoBehaviour
     public GameObject standardTurretCardPrefab;
     public GameObject missileLauncherCardPrefab;
     public GameObject laserBeamerCardPrefab;
+    public GameObject destroyCardPrefab;
+    
     
     public static CardDeck instance;
     private void Awake() {

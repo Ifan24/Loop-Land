@@ -54,6 +54,14 @@ public class Ground : MonoBehaviour
         }
         rd.material.color = hoverColor;
     }
+    
+    public bool DestoryBuildingOnTop() {
+        if (turret != null) {
+            Destroy(turret);
+            return true;
+        }
+        return false;
+    }
     private void OnMouseExit() {
         rd.material.color = defaultColor;
     }
