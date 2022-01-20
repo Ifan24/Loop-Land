@@ -28,7 +28,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         if (useDestroyCard) {
             return;
         }
-        // setBuildingType();
         if (buildingPrefab == null) {
             Debug.LogError("Dragging a card without building prefab");
             return;
@@ -37,7 +36,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         buildManager.SetTurretToBuild(buildingPrefab);
         // generate a small model of the card to preview the building
         buildingGO = (GameObject)Instantiate(buildingPrefab, Input.mousePosition, buildingPrefab.transform.rotation);
-        // buildingGO.GetComponent<Building>().SetRange(0);
         BuildingInstance = buildingGO.GetComponent<Building>();
         if (BuildingInstance == null) {
             Debug.LogError("Prefab has not inherited building interface");
@@ -45,14 +43,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         }
         BuildingInstance.SetRange(0);
     }
-    // void setBuildingType() {
-        // if (buildingType == "Standard turret") {
-        //     buildingPrefab = buildManager.standarTurretPrefab;
-        // }
-        // if (buildingType == "Missile Launcher") {
-        //     buildingPrefab = buildManager.missileLauncherPrefab;
-        // }
-    // }
     public void OnDrag(PointerEventData eventData) {
         // Debug.Log("dragging a card");
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -73,6 +63,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         if (!useDestroyCard) {
             Destroy(buildingGO);
         }
+        // TODO: use the last ray cast result
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         bool failToPlace = true;
@@ -101,5 +92,13 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         }
         
     }
-    
+    private void OnDestroy() {
+        // the card got destroy while holding it
+        if (!useDestroyCard) {
+            // remove the tmp game object
+            if (buildingGO != null) {
+                Destroy(buildingGO);     
+            }
+        }
+    }
 }
