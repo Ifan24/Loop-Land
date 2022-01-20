@@ -10411,6 +10411,7 @@ GameObject:
   - component: {fileID: 541923787}
   - component: {fileID: 541923789}
   - component: {fileID: 541923790}
+  - component: {fileID: 541923791}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10475,6 +10476,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 986090392}
   gamePauseUI: {fileID: 538725285}
+--- !u!114 &541923791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541923786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ac0d1ab98bee04c90dc98b92ae6097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMultiplies: 1
+  enemyUpgradeRate: 0.05
 --- !u!4 &542385091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6607617928714214356, guid: e339038f8dc23e94596201d958e4fc9c, type: 3}
@@ -21032,6 +21047,7 @@ MonoBehaviour:
   minX: -2
   maxX: 15
   zRange: 10
+  useMouseToMove: 0
 --- !u!4 &964077053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6607617928714214356, guid: e339038f8dc23e94596201d958e4fc9c, type: 3}

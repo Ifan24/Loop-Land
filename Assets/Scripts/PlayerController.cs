@@ -43,18 +43,24 @@ public class PlayerController : MonoBehaviour
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
         if (Vector3.Distance(target.position, transform.position) <= waypointStopDistance) {
             waypointsIdx++;
-            setNextWaypoint();
+            SetNextWaypoint();
         }
     }
-    void setNextWaypoint() {
+    void SetNextWaypoint() {
         // assuming the last waypoint is at the portal
         if (waypointsIdx == Waypoints.waypoints.Length) {
             // move to next loop
             waypointsIdx = 0;
-            loopCount++;
-            loopNumber.text = "Loop " + loopCount.ToString();
+            NextLoop();
         }
         target = Waypoints.waypoints[waypointsIdx];
+    }
+    
+    private void NextLoop() {
+        loopCount++;
+        // Set loop UI
+        loopNumber.text = "Loop " + loopCount.ToString();
+        EnemyManager.instance.EnterNextLoop(loopCount);
     }
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Enemy")) {

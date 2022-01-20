@@ -28,20 +28,27 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        upgradeEnemy();
         isActive = false;
         isDie = false;
         health = maxHealth;
         // to avoid divided by 0
         attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
         attackCountdown = 1f / attackFrequency;
+        
     }
-
+    private void upgradeEnemy() {
+        EnemyManager manager = EnemyManager.instance;
+        maxHealth *= manager.enemyMultiplies;
+        damage *= manager.enemyMultiplies;
+    }
+    
     public void TakeDamage(float damage) {
         health -= damage;
-        healthBar.fillAmount = health / maxHealth;
         if (health <= 0) {
             Die();
         }
+        healthBar.fillAmount = health / maxHealth;
     }
     private void Die() {
         if (isDie) return;

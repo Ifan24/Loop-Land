@@ -13,8 +13,9 @@ public class CameraController : MonoBehaviour
     public float maxX = 15.0f;
     public float zRange = 5.0f;
     
-    private bool disableMovement = true;
-
+    private bool disableMovement = false;
+    public bool useMouseToMove = false;
+    
     // Update is called once per frame
     void Update()
     {
@@ -33,16 +34,16 @@ public class CameraController : MonoBehaviour
         
         // when press wsad key or when mouse move to the side of the screen
         // move the camera to that direction
-        if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - panMargin) {
+        if (Input.GetKey(KeyCode.W) || (useMouseToMove && Input.mousePosition.y >= Screen.height - panMargin)) {
             transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= panMargin) {
+        if (Input.GetKey(KeyCode.S) || (useMouseToMove && Input.mousePosition.y <= panMargin)) {
             transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - panMargin) {
+        if (Input.GetKey(KeyCode.D) || (useMouseToMove && Input.mousePosition.x >= Screen.width - panMargin)) {
             transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
         }
-        if (Input.GetKey(KeyCode.A) || Input.mousePosition.x <= panMargin) {
+        if (Input.GetKey(KeyCode.A) || (useMouseToMove && Input.mousePosition.x <= panMargin)) {
             transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
         }
         
