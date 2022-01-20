@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 30.0f;
-    public float panMargin = 10f;
-    public float scrollSpeed = 5.0f;
-    public float minY = 5.0f;
-    public float maxY = 25.0f;
-    public float minX = -2f;
-    public float maxX = 15.0f;
-    public float zRange = 5.0f;
+    private float panSpeed = 30.0f;
+    private float panMargin = 10f;
+    private float scrollSpeed = 5.0f;
+    private float minY = 5.0f;
+    private float maxY = 25.0f;
+    private float minX = -2f;
+    private float maxX = 15.0f;
+    private float minZ = -5.0f;
+    private float MaxZ = 7.0f;
+    
     
     private bool disableMovement = false;
     public bool useMouseToMove = false;
+    // public bool followPlayer = true;
+    // public Transform player;
+    // public Vector3 offset;
+    // public float smoothness = 0.5f;
+    
+    // private void FixedUpdate() {
+        // if (followPlayer) {
+        //     Vector3 pos = player.position + offset;
+        //     transform.position = Vector3.Lerp(transform.position, pos, smoothness);
+            // transform.LookAt(player);
+    //     }
+    // }
     
     // Update is called once per frame
     void Update()
@@ -49,10 +63,10 @@ public class CameraController : MonoBehaviour
         
         Vector3 pos = transform.position;
         pos.y -= scrollSpeed * scrollInput * Time.deltaTime * 1000;
-        // clamp the axis
+        // clamp the axis so the camera not move too far away
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
-        pos.z = Mathf.Clamp(pos.z, -zRange, zRange);
+        pos.z = Mathf.Clamp(pos.z, minZ, MaxZ);
         
         transform.position = pos;
     }

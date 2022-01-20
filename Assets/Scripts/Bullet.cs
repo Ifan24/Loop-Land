@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using EZCameraShake;
 public class Bullet : MonoBehaviour
 {
     private GameObject target;
@@ -17,6 +15,9 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         if (target == null) {
+            if (explosionRadius > 0f) {
+                Explode();
+            }
             Destroy(gameObject);
             return;
         }
@@ -36,6 +37,8 @@ public class Bullet : MonoBehaviour
         if (explosionRadius > 0f) {
             Explode();        
         } else {
+            // Just a bullet
+            AudioManager.instance.Play("BulletImpact");
             Damage(target);
         }
         Destroy(gameObject);
@@ -47,6 +50,8 @@ public class Bullet : MonoBehaviour
                 Damage(collider.gameObject);
             }
         }
+        CameraShaker.Instance.ShakeOnce(4, 4, 0.1f, 1);
+        AudioManager.instance.Play("Explosion");
     }
     void Damage (GameObject enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
