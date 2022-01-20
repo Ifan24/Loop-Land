@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,8 +14,9 @@ public class Enemy : MonoBehaviour
     
     [Header("Enemy stats")]
     public float health;
+    public float maxHealth = 100;
+    public Image healthBar;
     public float originalAttackFrequency = 0.5f;
-    // [HideInInspector]
     public float attackFrequency;
     private float attackCountdown;
     private bool isActive;
@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     {
         isActive = false;
         isDie = false;
+        health = maxHealth;
         // to avoid divided by 0
         attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
         attackCountdown = 1f / attackFrequency;
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage) {
         health -= damage;
+        healthBar.fillAmount = health / maxHealth;
         if (health <= 0) {
             Die();
         }
