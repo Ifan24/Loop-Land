@@ -9,7 +9,8 @@ public class PlayerStats : MonoBehaviour
     public static float playerHealth;
     public static float playerMaxHealth = 100;
     public Text healthUI;
-    public bool isDead;
+    public Image healthBar;
+    private bool isDead;
     
     
     public static PlayerStats instance;
@@ -25,11 +26,12 @@ public class PlayerStats : MonoBehaviour
     private void Start() {
         isDead = false;
         playerHealth = playerMaxHealth;
-        SetHealthText();
+        SetHealthUI();
     }
     
-    private void SetHealthText() {
+    private void SetHealthUI() {
         healthUI.text = "Health " + playerHealth.ToString("F0") + " / " + playerMaxHealth.ToString("F0");
+        healthBar.fillAmount = playerHealth / playerMaxHealth;
     }
     public void TakeDamage(float damage) {
         playerHealth -= damage;
@@ -38,7 +40,7 @@ public class PlayerStats : MonoBehaviour
             playerHealth = 0;
             GameManager.instance.GameOver();
         }
-        SetHealthText();
+        SetHealthUI();
     }
 
 }
