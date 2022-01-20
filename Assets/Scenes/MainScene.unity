@@ -10646,6 +10646,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
   sounds:
+  - name: BackgroundMusic
+    clip: {fileID: 8300000, guid: 0d60be2280dc244908dd843c81666b11, type: 3}
+    volume: 0
+    volumeVariance: 0
+    pitch: 0.1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
   - name: Explosion
     clip: {fileID: 8300000, guid: af2b012ecebc34a91b65a0351bd46cc7, type: 3}
     volume: 0.5
