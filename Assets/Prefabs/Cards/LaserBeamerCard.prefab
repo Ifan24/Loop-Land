@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 7806454467364444451}
   - component: {fileID: 7806454467364444460}
   - component: {fileID: 7806454467364444461}
+  - component: {fileID: 6359330715601077961}
   m_Layer: 5
   m_Name: LaserBeamerCard
   m_TagString: Untagged
@@ -266,3 +267,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 8996881475353919691, guid: b699ffaa8d36278449a9d5b195d90404, type: 3}
+  useDestroyCard: 0
+--- !u!114 &6359330715601077961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806454467364444463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a9d72c58cb62140ab326c4589ddfd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

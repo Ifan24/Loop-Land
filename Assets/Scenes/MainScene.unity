@@ -10509,6 +10509,7 @@ GameObject:
   - component: {fileID: 541923789}
   - component: {fileID: 541923790}
   - component: {fileID: 541923791}
+  - component: {fileID: 541923792}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10587,6 +10588,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMultiplies: 1
   enemyUpgradeRate: 0.05
+--- !u!114 &541923792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541923786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32d204ff264c3b4ba0a87755b0f35b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &542385091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6607617928714214356, guid: e339038f8dc23e94596201d958e4fc9c, type: 3}
@@ -43114,10 +43127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79875e97241f6f42a00e63d73347616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardTurretCardPrefab: {fileID: 2781485861123962042, guid: fcf29eab3567de946941c60d6e960b20, type: 3}
-  missileLauncherCardPrefab: {fileID: 2781485861123962042, guid: 59e1e4469f01a7344bc5a87922d461ae, type: 3}
-  laserBeamerCardPrefab: {fileID: 7806454467364444463, guid: 940585c081550b14789603bda34d5e31, type: 3}
-  destroyCardPrefab: {fileID: 4534533912209313207, guid: 1981a86aac365a34dae75b566722bef5, type: 3}
+  cardPrefabs:
+  - {fileID: 2781485861123962042, guid: fcf29eab3567de946941c60d6e960b20, type: 3}
+  - {fileID: 2781485861123962042, guid: 59e1e4469f01a7344bc5a87922d461ae, type: 3}
+  - {fileID: 7806454467364444463, guid: 940585c081550b14789603bda34d5e31, type: 3}
+  - {fileID: 4534533912209313207, guid: 1981a86aac365a34dae75b566722bef5, type: 3}
   maxNumberOfCard: 10
 --- !u!1001 &1852109376
 PrefabInstance:

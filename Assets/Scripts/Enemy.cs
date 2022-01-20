@@ -3,15 +3,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Enemy Drop rate")]
-
-    // public List<float> buildingDropRate;
-    public float standardTurretDropRate = 0.05f;
-    public float missileLauncherDropRate = 0.02f;
-    public float laserBeamerDropRate = 0.02f;
-    public float destroyCardDropRate = 0.2f;
-    
-    
     [Header("Enemy stats")]
     public float health;
     public float maxHealth = 100;
@@ -22,6 +13,7 @@ public class Enemy : MonoBehaviour
     private bool isActive;
     public float damage = 10.0f;
     private bool isDie;
+    public float dropCardRate = 1;
     
     [Header("Enemy effect")]
     public GameObject deathEffect;
@@ -56,24 +48,9 @@ public class Enemy : MonoBehaviour
         // instantiate Effect and destroy it after 5 sec
         Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity), 5);
         // drop card
-        DropCard();
+        DropCardManager.instance.DropCard(dropCardRate);
         
         Destroy(gameObject);
-    }
-    void DropCard() {
-        CardDeck cd = CardDeck.instance;
-        if (Random.Range(0, 1.0f) <= standardTurretDropRate) {
-            cd.addCardToDeck(cd.standardTurretCardPrefab);
-        }
-        if (Random.Range(0, 1.0f) <= missileLauncherDropRate) {
-            cd.addCardToDeck(cd.missileLauncherCardPrefab);
-        }
-        if (Random.Range(0, 1.0f) <= laserBeamerDropRate) {
-            cd.addCardToDeck(cd.laserBeamerCardPrefab);
-        }
-        if (Random.Range(0, 1.0f) <= destroyCardDropRate) {
-            cd.addCardToDeck(cd.destroyCardPrefab);
-        }
     }
     // Update is called once per frame
     void Update()

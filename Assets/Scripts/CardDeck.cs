@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CardDeck : MonoBehaviour
 {
-    public GameObject standardTurretCardPrefab;
-    public GameObject missileLauncherCardPrefab;
-    public GameObject laserBeamerCardPrefab;
-    public GameObject destroyCardPrefab;
+    public List<GameObject> cardPrefabs;
     public int maxNumberOfCard = 10;
     
     public static CardDeck instance;
@@ -23,7 +20,6 @@ public class CardDeck : MonoBehaviour
         // too much cards at hand, destroy the first card    
         if (transform.childCount >= maxNumberOfCard) {
             // TODO: some effects?
-            Debug.Log("destory first card");
             Destroy(transform.GetChild(0).gameObject);
         }
     }

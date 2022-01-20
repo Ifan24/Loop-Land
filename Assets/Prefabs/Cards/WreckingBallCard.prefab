@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 4534533912209313211}
   - component: {fileID: 4534533912209313204}
   - component: {fileID: 4534533912209313205}
+  - component: {fileID: 2973288269928726343}
   m_Layer: 5
   m_Name: WreckingBallCard
   m_TagString: Untagged
@@ -266,5 +267,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 0}
-  usePrefab: 0
   useDestroyCard: 1
+--- !u!114 &2973288269928726343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534533912209313207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a9d72c58cb62140ab326c4589ddfd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropRate: 0.2
