@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteAlways]
 public class LightingManager : MonoBehaviour
@@ -9,7 +10,8 @@ public class LightingManager : MonoBehaviour
     //Variables
     [SerializeField, Range(0, 24)] private float TimeOfDay;
     private SpawnManager spawnManager;
-
+    public Image timeBar;
+    
     private void Start() {
         spawnManager = SpawnManager.instance;
     }
@@ -39,6 +41,7 @@ public class LightingManager : MonoBehaviour
 
     private void UpdateLighting(float timePercent)
     {
+        timeBar.fillAmount = timePercent;
         //Set ambient and fog
         RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);

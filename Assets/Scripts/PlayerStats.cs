@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
     }
     
     private void SetHealthUI() {
+        // if (healthUI == null || healthBar == null) return;
         healthUI.text = "Health " + playerHealth.ToString("F0") + " / " + playerMaxHealth.ToString("F0");
         healthBar.fillAmount = playerHealth / playerMaxHealth;
     }
