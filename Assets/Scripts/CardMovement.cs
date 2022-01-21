@@ -16,9 +16,13 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     
     [Header("Default No prefab")]
     public bool useDestroyCard = false;
+    private string groundTag = "Ground";
     private void Start() {
         buildManager = BuildManager.instance;
-        cam = Camera.main;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        if (cam == null) {
+            Debug.Log("No main camera in the scene!");
+        }
     }
     public void OnBeginDrag(PointerEventData eventData) {
         // make the card invisible
@@ -51,7 +55,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             if (!useDestroyCard) {
                 buildingGO.transform.position = hit.point;
             }
-            if (hit.transform.gameObject.CompareTag("Ground")) {
+            if (hit.transform.gameObject.CompareTag(groundTag)) {
                 hit.transform.GetComponent<Ground>().CardHoverIndicator();
             }
         }
@@ -68,7 +72,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         RaycastHit hit;
         bool failToPlace = true;
         if (Physics.Raycast(ray, out hit)) {
-            if (hit.transform.gameObject.CompareTag("Ground")) {
+            if (hit.transform.gameObject.CompareTag(groundTag)) {
                 Ground ground = hit.transform.gameObject.GetComponent<Ground>();
                 // successfully place a card there
                 if (useDestroyCard) {
