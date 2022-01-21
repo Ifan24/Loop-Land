@@ -42,7 +42,8 @@ public class Turret : MonoBehaviour, Building
     }
     
     void AwakeTurret() {
-        if (Vector3.Distance(player.gameObject.transform.position, transform.position) < range) {
+        // if distance between player and the turret is less than the range
+        if ((player.gameObject.transform.position - transform.position).sqrMagnitude < range * range) {
             // attack enemies that are combatting with the player
             if (player.activeEnemies.Count > 0) {
                 // attack the first in the list

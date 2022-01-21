@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
         // if (GameManager.isGameOver) return;
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-        if (Vector3.Distance(target.position, transform.position) <= waypointStopDistance) {
+        // distance between target and player is less than waypointStopDistance
+        if ((target.position - transform.position).sqrMagnitude <= waypointStopDistance * waypointStopDistance) {
             waypointsIdx++;
             SetNextWaypoint();
         }
