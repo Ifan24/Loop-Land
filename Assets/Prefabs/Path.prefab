@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6417154262127055759}
   m_Layer: 0
   m_Name: Path
-  m_TagString: Untagged
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1953476469204491344, guid: 08a53ad9ccdeb2f43a537e2cdb85fdb3, type: 3}
   offset: {x: 0, y: 0.7, z: 0}
   spawnRate: 0.1
+  spawnInterval: 15
