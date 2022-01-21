@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Text;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public Text healthUI;
     public Image healthBar;
     private bool isDead;
-    
+    private StringBuilder builder;
     
     public static PlayerStats instance;
     private void Awake() {
@@ -24,12 +24,16 @@ public class PlayerStats : MonoBehaviour
     private void Start() {
         isDead = false;
         playerHealth = playerMaxHealth;
+        builder = new StringBuilder();
         SetHealthUI();
     }
     
     private void SetHealthUI() {
-        // if (healthUI == null || healthBar == null) return;
-        healthUI.text = "Health " + playerHealth.ToString("F0") + " / " + playerMaxHealth.ToString("F0");
+        if (healthUI == null || healthBar == null) return;
+        builder.Clear();
+        builder.Append("Health ").Append(playerHealth.ToString("F0"));
+        builder.Append(" / ").Append(playerMaxHealth.ToString("F0"));
+        healthUI.text = builder.ToString();
         healthBar.fillAmount = playerHealth / playerMaxHealth;
     }
     public void TakeDamage(float damage) {
