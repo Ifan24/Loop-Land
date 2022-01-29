@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public static float playerMaxHealth = 100;
     public Text healthUI;
     public Image healthBar;
-    private bool isDead;
+    public bool isDead;
     private StringBuilder builder;
     
     public static PlayerStats instance;

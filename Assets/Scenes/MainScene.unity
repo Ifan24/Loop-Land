@@ -10724,6 +10724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthUI: {fileID: 1526502702}
   healthBar: {fileID: 1296477248}
+  isDead: 0
 --- !u!114 &541923790
 MonoBehaviour:
   m_ObjectHideFlags: 0

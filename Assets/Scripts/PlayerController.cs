@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
             activeEnemies.Add(other.gameObject);
             Enemy e = other.gameObject.GetComponent<Enemy>();
             if (e != null) {
-                e.SetActive(true);
+                e.SetActive(true, transform);
             }
         }
     }
