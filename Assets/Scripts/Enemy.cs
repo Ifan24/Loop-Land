@@ -3,10 +3,15 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Required components")]
+    public Image healthBar;
+    public GameObject deathEffect;
+    public Animator animator;
+    
+    
     [Header("Enemy stats")]
     public float health;
     public float maxHealth = 100;
-    public Image healthBar;
     public float originalAttackFrequency = 0.5f;
     private float attackFrequency;
     private float attackCountdown;
@@ -16,8 +21,6 @@ public class Enemy : MonoBehaviour
     public float dropCardRate = 1;
     
     [Header("Enemy effect")]
-    public GameObject deathEffect;
-    private Animator animator;
     private int isAttackHash;
     private PlayerStats playerStats;
     private Transform targetTransform;
@@ -33,12 +36,11 @@ public class Enemy : MonoBehaviour
         attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
         attackCountdown = 1f / attackFrequency;
         playerStats = PlayerStats.instance;
-        animator = GetComponentInChildren<Animator>();
-        if (!animator) {
-            Debug.Log("Enemy has no animator");
-        }
         isAttackHash = Animator.StringToHash("isAttack");
     }
+    /// <summary>
+    /// Upgrade enemes for each loop the player passed
+    /// </summary>
     private void upgradeEnemy() {
         EnemyManager manager = EnemyManager.instance;
         maxHealth *= manager.enemyMultiplies;
@@ -54,7 +56,6 @@ public class Enemy : MonoBehaviour
     }
     private void Die() {
         if (isDie) return;
-        animator.SetBool("isDie", true);
         isDie = true;
         // instantiate Effect and destroy it after 5 sec
         Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity), 5);
@@ -63,7 +64,9 @@ public class Enemy : MonoBehaviour
         
         Destroy(gameObject);
     }
-    
+    /// <summary>
+    /// Turn the enemy head toword its target
+    /// </summary>
     private void LockOnTarget() {
         Vector3 dir = targetTransform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);

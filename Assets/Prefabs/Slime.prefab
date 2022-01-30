@@ -135,13 +135,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8b26ff33b972646ab1741c6a0fd211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 7366948522818159322}
+  deathEffect: {fileID: 3906030164205266553, guid: eb2fe3679e2038748a23d2d36c99dfcb, type: 3}
+  animator: {fileID: 7045245199609704073}
   health: 100
   maxHealth: 100
-  healthBar: {fileID: 7366948522818159322}
   originalAttackFrequency: 0.25
   damage: 10
   dropCardRate: 1
-  deathEffect: {fileID: 3906030164205266553, guid: eb2fe3679e2038748a23d2d36c99dfcb, type: 3}
+  turnSmoothness: 10
 --- !u!1 &7820451126831957598
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,5 +399,10 @@ PrefabInstance:
 --- !u!4 &6955749290827125579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+  m_PrefabInstance: {fileID: 6959912814134656567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7045245199609704073 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95471671811264702, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
   m_PrefabInstance: {fileID: 6959912814134656567}
   m_PrefabAsset: {fileID: 0}
