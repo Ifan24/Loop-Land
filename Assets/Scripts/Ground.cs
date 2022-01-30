@@ -13,13 +13,14 @@ public class Ground : MonoBehaviour
     private BuildManager buildManager;
     public GameObject buildEffect;
     public GameObject destroyEffect;
-    
+    private BossSummonManager bossSummonManager;
     // Start is called before the first frame update
     void Start()
     {
         rd = GetComponent<Renderer>();
         defaultColor = rd.material.color;
         buildManager = BuildManager.instance;
+        bossSummonManager = BossSummonManager.instance;
     }
     
     public bool PlaceBuilding() {
@@ -33,6 +34,7 @@ public class Ground : MonoBehaviour
             GameObject effectGO = Instantiate(buildEffect, GetBuildPosition(), Quaternion.identity) as GameObject;
             Destroy(effectGO, 5);
             
+            bossSummonManager.addNumberOfBuilding(1);
             return true;
         }
         return false;
@@ -61,6 +63,7 @@ public class Ground : MonoBehaviour
         if (turret != null) {
             Destroy(turret);
             Destroy(Instantiate(destroyEffect, GetBuildPosition(), Quaternion.identity), 5);
+            bossSummonManager.addNumberOfBuilding(-1);
             return true;
         }
         return false;
