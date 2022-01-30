@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     public Image healthBar;
     public bool isDead;
     private StringBuilder builder;
-    
+    private PlayerController playerController;
     public static PlayerStats instance;
     private void Awake() {
         if (instance != null) {
@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
         isDead = false;
         playerHealth = playerMaxHealth;
         builder = new StringBuilder();
+        playerController = PlayerController.instance;
         SetHealthUI();
     }
     
@@ -38,12 +39,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) {
         playerHealth -= damage;
+        
         if (!isDead && playerHealth <= 0) {
-            isDead = true;
-            playerHealth = 0;
-            GameManager.instance.GameOver();
+            PlayerDie();
         }
         SetHealthUI();
     }
-
+    private void PlayerDie() {
+        isDead = true;
+        playerHealth = 0;
+        GameManager.instance.GameOver();
+    }
 }
