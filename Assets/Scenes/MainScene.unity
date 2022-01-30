@@ -3237,14 +3237,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541923790}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1087110359}
+        m_TargetAssemblyTypeName: GameSpeedManager, Assembly-CSharp
         m_MethodName: ChangeGameSpeed
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13451,14 +13451,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541923790}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1087110359}
+        m_TargetAssemblyTypeName: GameSpeedManager, Assembly-CSharp
         m_MethodName: ChangeGameSpeed
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13476,7 +13476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4627451, g: 0.8, b: 0.28235295, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25428,6 +25428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1087110357}
   - component: {fileID: 1087110358}
+  - component: {fileID: 1087110359}
   m_Layer: 5
   m_Name: GameSpeed
   m_TagString: Untagged
@@ -25484,6 +25485,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1087110359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087110356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d31a94597acd54fa327d1878913a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  currentSpeedColor: {r: 0.4627451, g: 0.8, b: 0.28235295, a: 1}
+  prevSpeed: 0
 --- !u!1001 &1088487440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29422,8 +29438,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541923790}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1087110359}
+        m_TargetAssemblyTypeName: GameSpeedManager, Assembly-CSharp
         m_MethodName: ChangeGameSpeed
         m_Mode: 4
         m_Arguments:
@@ -33259,14 +33275,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541923790}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1087110359}
+        m_TargetAssemblyTypeName: GameSpeedManager, Assembly-CSharp
         m_MethodName: ChangeGameSpeed
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
