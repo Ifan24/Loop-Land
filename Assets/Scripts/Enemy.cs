@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     [Header("Required components")]
     public Image healthBar;
     public GameObject deathEffect;
-    public Animator animator;
+    public Animator enemyAnimator;
     
     
     [Header("Enemy stats")]
@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     
     [Header("Enemy effect")]
     private int isAttackHash;
+    private int isHitHash;
     private PlayerStats playerStats;
     private Transform targetTransform;
     public float turnSmoothness = 10f;
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
         attackCountdown = 1f / attackFrequency;
         playerStats = PlayerStats.instance;
         isAttackHash = Animator.StringToHash("isAttack");
+        isHitHash = Animator.StringToHash("isHit");
     }
     /// <summary>
     /// Upgrade enemes for each loop the player passed
@@ -49,6 +51,7 @@ public class Enemy : MonoBehaviour
     
     public void TakeDamage(float damage) {
         health -= damage;
+        enemyAnimator.SetBool(isHitHash, true);
         if (health <= 0) {
             Die();
         }
@@ -68,22 +71,29 @@ public class Enemy : MonoBehaviour
     /// Turn the enemy head toword its target
     /// </summary>
     private void LockOnTarget() {
+        if (!targetTransform) return;
         Vector3 dir = targetTransform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSmoothness).eulerAngles;
         transform.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
     
+    private void LateUpdate() {
+        if (enemyAnimator.GetBool(isHitHash)) {
+            enemyAnimator.SetBool(isHitHash, false);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         if (!isActive || playerStats.isDead) return;
         
         LockOnTarget();
-        // on cooldown
-        if (animator.GetBool(isAttackHash)) {
-            animator.SetBool(isAttackHash, false);
+        // reset states
+        if (enemyAnimator.GetBool(isAttackHash)) {
+            enemyAnimator.SetBool(isAttackHash, false);
         }
+        
         if (attackCountdown <= 0.0f) {
             Attack();
             attackCountdown = 1f / attackFrequency;
@@ -94,7 +104,7 @@ public class Enemy : MonoBehaviour
     // attack the player
     private void Attack() {
         if (gameObject != null) {
-            animator.SetBool(isAttackHash, true);
+            enemyAnimator.SetBool(isAttackHash, true);
             playerStats.TakeDamage(damage);
         }
     }
@@ -107,7 +117,7 @@ public class Enemy : MonoBehaviour
     public void SetActive(bool active, Transform _target) {
         isActive = active;
         if (active) {
-            animator.SetBool("isActive", true);
+            enemyAnimator.SetBool("isActive", true);
             targetTransform = _target;
         }
     }

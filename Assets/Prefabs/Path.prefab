@@ -108,6 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137dae6d179d62044bc2976c8199714b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6058108449403783709, guid: 03b3d3c6f9d6b66478d5910d06f617da, type: 3}
-  offset: {x: 0, y: 0.7, z: 0}
-  spawnRate: 0.1
+  enemyPrefab: {fileID: 5543102610799708957, guid: 208fbc04236b97949af6275c22b75c5f, type: 3}
+  offset: {x: 0, y: 0.2, z: 0}
+  spawnRate: 0.05

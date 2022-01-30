@@ -39,6 +39,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage) {
         playerHealth -= damage;
+        playerController.EnterHitAnimation();
         
         if (!isDead && playerHealth <= 0) {
             PlayerDie();
@@ -47,6 +48,8 @@ public class PlayerStats : MonoBehaviour
     }
     private void PlayerDie() {
         isDead = true;
+        playerController.EnterDieAnimation();
+        
         playerHealth = 0;
         GameManager.instance.GameOver();
     }

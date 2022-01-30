@@ -21,7 +21,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         buildManager = BuildManager.instance;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         if (cam == null) {
-            Debug.Log("No main camera in the scene!");
+            Debug.LogError("No main camera in the scene!");
         }
     }
     public void OnBeginDrag(PointerEventData eventData) {

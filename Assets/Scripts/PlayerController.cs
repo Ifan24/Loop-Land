@@ -12,7 +12,13 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     
     private int loopCount = 0;
-    [Header("Player stats")]
+    [Header("Player attack stats")]
+    public float originalAttackFrequency = 0.5f;
+    private float attackFrequency;
+    private float attackCountdown;
+    public float damage = 10.0f;
+    
+    [Header("Player movement stats")]
     public float speed;
     public float waypointStopDistance = 0.1f;
     private Transform target;
@@ -27,10 +33,14 @@ public class PlayerController : MonoBehaviour
     private int isWalkingHash;
     private int isRunningHash;
     private int velocityHash;
-    
+    private int isDiedHash;
     public float turnSmoothness = 10.0f;
     private Transform faceTarget;
     public float velocity;
+    private Enemy targetEnemy;
+    
+    
+    // Singleton
     public static PlayerController instance;
     private void Awake() {
         if (instance != null) {
@@ -50,6 +60,7 @@ public class PlayerController : MonoBehaviour
         isRunningHash = Animator.StringToHash("isRunning");
         isHitHash = Animator.StringToHash("isHit");
         velocityHash = Animator.StringToHash("velocity");
+        isDiedHash = Animator.StringToHash("isDied");
         
         velocity = 0;
     }
@@ -57,18 +68,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerAnimator.GetBool(isDiedHash)) return;
         activeEnemies.RemoveAll(enemy => enemy == null);
         LockOnTarget();
         
+        // reset other states
+        if (playerAnimator.GetBool(isBattleHash)) {
+            playerAnimator.SetBool(isBattleHash, false);
+        }
+        if (playerAnimator.GetBool(isHitHash)) {
+            playerAnimator.SetBool(isHitHash, false);
+        }
+        
         // walking && running state
         if (activeEnemies.Count == 0) {
-            // reset other states
-            if (playerAnimator.GetBool(isBattleHash)) {
-                playerAnimator.SetBool(isBattleHash, false);
-            }
-            if (playerAnimator.GetBool(isHitHash)) {
-                playerAnimator.SetBool(isHitHash, false);
-            }
             if (!playerAnimator.GetBool(isWalkingHash)) {
                 playerAnimator.SetBool(isWalkingHash, true);
             }
@@ -83,16 +96,35 @@ public class PlayerController : MonoBehaviour
             if (playerAnimator.GetBool(isWalkingHash)) {
                 playerAnimator.SetBool(isWalkingHash, false);
             }
+            
+            // attack target
+            if (attackCountdown <= 0.0f) {
+                Attack();
+                attackCountdown = 1f / attackFrequency;
+            }
+            attackCountdown -= Time.deltaTime;
         
         }
         
+        // set blend tree velocity
         velocity = Mathf.Clamp(velocity, 0, 5);
         playerAnimator.SetFloat(velocityHash, velocity);
+        
     }
     
-    
+    private void Attack() {
+        // TODO: always attack the first enemy in the list
+        if (activeEnemies.Count > 0) {
+            targetEnemy = activeEnemies[0].GetComponent<Enemy>();
+        }
+        if (targetEnemy != null) {
+            targetEnemy.TakeDamage(damage);
+        }
+        playerAnimator.SetBool(isBattleHash, true);
+    }
     private void LockOnTarget() {
-        Vector3 dir = target.position - transform.position;
+        if (faceTarget == null) return;
+        Vector3 dir = faceTarget.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSmoothness).eulerAngles;
         transform.rotation = Quaternion.Euler(0, rotation.y, 0);
@@ -129,13 +161,16 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         // enter battle state
         if (other.gameObject.CompareTag("Enemy")) {
-            playerAnimator.SetBool(isBattleHash, true);
             faceTarget = other.transform;
             activeEnemies.Add(other.gameObject);
             Enemy e = other.gameObject.GetComponent<Enemy>();
             if (e != null) {
                 e.SetActive(true, transform);
             }
+            
+            // setup attack frequency
+            attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
+            attackCountdown = 1f / attackFrequency;
         }
     }
     
@@ -144,6 +179,6 @@ public class PlayerController : MonoBehaviour
     }
     
     public void EnterDieAnimation() {
-        playerAnimator.SetBool("isDie", true);
+        playerAnimator.SetBool(isDiedHash, true);
     }
 }
