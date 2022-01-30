@@ -110,5 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {r: 1, g: 0.8919718, b: 0.6556604, a: 1}
   warningColor: {r: 1, g: 0.3066038, b: 0.3066038, a: 0}
+  rangeColor: {r: 0.41389936, g: 0.764151, b: 0.3135903, a: 0}
   buildEffect: {fileID: 2160603246491354621, guid: c377ee792e2b40d4aa6e8912c3e0f17f, type: 3}
   destroyEffect: {fileID: 3628085594016039200, guid: 2d323ba4e4e89184aa0c506389713c49, type: 3}

@@ -17,12 +17,16 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     [Header("Default No prefab")]
     public bool useDestroyCard = false;
     private string groundTag = "Ground";
+    private string pathTag = "Path";
+    private List<Grids> prevColliders;
+    private float buildingRange;
     private void Start() {
         buildManager = BuildManager.instance;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         if (cam == null) {
             Debug.LogError("No main camera in the scene!");
         }
+        prevColliders = new List<Grids>();
     }
     public void OnBeginDrag(PointerEventData eventData) {
         // make the card invisible
@@ -45,23 +49,44 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             Debug.LogError("Prefab has not inherited building interface");
             return;
         }
+        buildingRange = BuildingInstance.GetRange() - 1;
         BuildingInstance.SetRange(0);
     }
+    
+    private void ClearColors() {
+        if (prevColliders.Count == 0) return;
+        foreach(Grids grid in prevColliders) {
+            if (grid != null) {
+                grid.SetToDefaultColor();
+            }
+        }
+        prevColliders.Clear();
+    }
     public void OnDrag(PointerEventData eventData) {
-        // Debug.Log("dragging a card");
+        // show the range of the building
+        // TODO: very costly operation
+        ClearColors();
+        if (!useDestroyCard) {
+            Collider[] colliders = Physics.OverlapSphere(buildingGO.transform.position, buildingRange);
+            foreach(Collider collider in colliders) {
+                if (collider != null && (collider.gameObject.CompareTag(groundTag) || collider.gameObject.CompareTag(pathTag))) {
+                    Grids grid = collider.GetComponent<Grids>();
+                    grid.RangeIndicator();
+                    prevColliders.Add(grid);
+                }
+            }
+        }
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)) {
             if (!useDestroyCard) {
                 buildingGO.transform.position = hit.point;
             }
-            if (hit.transform.gameObject.CompareTag(groundTag)) {
-                hit.transform.GetComponent<Ground>().CardHoverIndicator();
+            if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(pathTag)) {
+                hit.transform.GetComponent<Grids>().CardHoverIndicator();
             }
         }
-        // show the range of the building
-        // Gizmos.color = Color.red;
-        // Gizmos.DrawWireSphere(buildingGO.transform.position, BuildingInstance.GetOriginalRange());
+        
     }
     public void OnEndDrag(PointerEventData eventData) {
         if (!useDestroyCard) {
@@ -95,6 +120,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             transform.localScale = origincalScale;
         }
         
+        ClearColors();
     }
     private void OnDestroy() {
         // the card got destroy while holding it
@@ -103,6 +129,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             if (buildingGO != null) {
                 Destroy(buildingGO);     
             }
+            ClearColors();
         }
     }
 }

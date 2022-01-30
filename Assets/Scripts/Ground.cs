@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class Ground : MonoBehaviour
+public class Ground : MonoBehaviour, Grids
 {
     public Color hoverColor;
     public Color warningColor;
+    public Color rangeColor;
     private Vector3 offset;
     private Color defaultColor;
+    
     private Renderer rd;
     private GameObject turret;
     private BuildManager buildManager;
@@ -51,6 +51,15 @@ public class Ground : MonoBehaviour
         if (turret != null) {
             rd.material.color = warningColor;
         }
+        else {
+            rd.material.color = hoverColor;
+        }
+    }
+    public void RangeIndicator() {
+        rd.material.color = rangeColor;
+    }
+    public void SetToDefaultColor() {
+        rd.material.color = defaultColor;
     }
     private void OnMouseEnter() {
         if (EventSystem.current.IsPointerOverGameObject()) {
@@ -69,6 +78,6 @@ public class Ground : MonoBehaviour
         return false;
     }
     private void OnMouseExit() {
-        rd.material.color = defaultColor;
+        SetToDefaultColor();
     }
 }

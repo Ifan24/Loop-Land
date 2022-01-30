@@ -5089,7 +5089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817480eaaf865b3449307e2045bb07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4
+  range: 3
   awakeFrequency: 0.3
   partToRotate: {fileID: 5237559693153608131}
   turnSmoothness: 10

@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817480eaaf865b3449307e2045bb07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 6
+  range: 4
   awakeFrequency: 0.5
   partToRotate: {fileID: 3519346815817492622}
   turnSmoothness: 10
@@ -283,8 +283,11 @@ MonoBehaviour:
   firePoint: {fileID: 6268579314047758552}
   fireRate: 1
   useLaser: 0
+  damageOverTime: 30
   lineRenderer: {fileID: 0}
   laserEffect: {fileID: 0}
+  impactLight: {fileID: 0}
+  slowRate: 0
 --- !u!1001 &4704052838226695481
 PrefabInstance:
   m_ObjectHideFlags: 0

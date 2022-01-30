@@ -9,7 +9,6 @@ public class Turret : MonoBehaviour, Building
     
     [Header("General")]
     public float range = 5.0f;
-    private float originalRange;
     
     [Header("Unity Setup Field")]
     public float awakeFrequency = 0.3f;
@@ -34,7 +33,6 @@ public class Turret : MonoBehaviour, Building
     public float slowRate;
     void Start()
     {
-        originalRange = range;
         player = PlayerController.instance;
         // player = GameObject.Find("Player").transform;
         InvokeRepeating("AwakeTurret", 0, awakeFrequency);
@@ -116,8 +114,8 @@ public class Turret : MonoBehaviour, Building
     public void SetRange(int _range) {
         range = _range;
     }
-    public float GetOriginalRange() {
-        return originalRange;
+    public float GetRange() {
+        return range;
     }
     
     void Attack() {

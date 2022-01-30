@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4956892221234726356}
   - component: {fileID: 7989711828385038657}
   - component: {fileID: -6417154262127055759}
+  - component: {fileID: 1515744179824860674}
   m_Layer: 0
   m_Name: Path
   m_TagString: Path
@@ -111,3 +112,18 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5543102610799708957, guid: 208fbc04236b97949af6275c22b75c5f, type: 3}
   offset: {x: 0, y: 0.2, z: 0}
   spawnRate: 0.05
+--- !u!114 &1515744179824860674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979969563378122779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b957e91b4200324b992b9c159a7a5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 1, g: 0.8901961, b: 0.654902, a: 1}
+  warningColor: {r: 1, g: 0.30588236, b: 0.30588236, a: 0}
+  rangeColor: {r: 0.41568628, g: 0.7647059, b: 0.3137255, a: 0}

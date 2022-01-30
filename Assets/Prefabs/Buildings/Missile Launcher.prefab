@@ -57,8 +57,11 @@ MonoBehaviour:
   firePoint: {fileID: 2823098480031418075}
   fireRate: 0.25
   useLaser: 0
+  damageOverTime: 30
   lineRenderer: {fileID: 0}
   laserEffect: {fileID: 0}
+  impactLight: {fileID: 0}
+  slowRate: 0
 --- !u!1 &950775213610859886
 GameObject:
   m_ObjectHideFlags: 0
