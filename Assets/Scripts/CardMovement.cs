@@ -18,7 +18,10 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     public bool useDestroyCard = false;
     private string groundTag = "Ground";
     private string pathTag = "Path";
-    private List<Grids> prevColliders;
+    // private List<Grids> prevColliders;
+    [Header("Range indicator")]
+    public GameObject forceFieldPrefab;
+    private GameObject forceFieldGO;
     private float buildingRange;
     private void Start() {
         buildManager = BuildManager.instance;
@@ -26,7 +29,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         if (cam == null) {
             Debug.LogError("No main camera in the scene!");
         }
-        prevColliders = new List<Grids>();
     }
     public void OnBeginDrag(PointerEventData eventData) {
         // make the card invisible
@@ -49,38 +51,25 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             Debug.LogError("Prefab has not inherited building interface");
             return;
         }
-        buildingRange = BuildingInstance.GetRange() - 1;
+        buildingRange = BuildingInstance.GetRange();
         BuildingInstance.SetRange(0);
+        
+        // create force field to show the building range
+        // scale = 2*range
+        float forceFieldRange = buildingRange * 2;
+        forceFieldGO = (GameObject)Instantiate(forceFieldPrefab, Input.mousePosition, Quaternion.identity);
+        forceFieldGO.transform.localScale = new Vector3(forceFieldRange, forceFieldRange, forceFieldRange);
+        
     }
     
-    private void ClearColors() {
-        if (prevColliders.Count == 0) return;
-        foreach(Grids grid in prevColliders) {
-            if (grid != null) {
-                grid.SetToDefaultColor();
-            }
-        }
-        prevColliders.Clear();
-    }
     public void OnDrag(PointerEventData eventData) {
         // show the range of the building
-        // TODO: very costly operation
-        ClearColors();
-        if (!useDestroyCard) {
-            Collider[] colliders = Physics.OverlapSphere(buildingGO.transform.position, buildingRange);
-            foreach(Collider collider in colliders) {
-                if (collider != null && (collider.gameObject.CompareTag(groundTag) || collider.gameObject.CompareTag(pathTag))) {
-                    Grids grid = collider.GetComponent<Grids>();
-                    grid.RangeIndicator();
-                    prevColliders.Add(grid);
-                }
-            }
-        }
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)) {
             if (!useDestroyCard) {
                 buildingGO.transform.position = hit.point;
+                forceFieldGO.transform.position = hit.point;
             }
             if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(pathTag)) {
                 hit.transform.GetComponent<Grids>().CardHoverIndicator();
@@ -91,6 +80,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     public void OnEndDrag(PointerEventData eventData) {
         if (!useDestroyCard) {
             Destroy(buildingGO);
+            Destroy(forceFieldGO);
         }
         // TODO: use the last ray cast result
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -120,16 +110,17 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             transform.localScale = origincalScale;
         }
         
-        ClearColors();
     }
     private void OnDestroy() {
         // the card got destroy while holding it
         if (!useDestroyCard) {
             // remove the tmp game object
             if (buildingGO != null) {
-                Destroy(buildingGO);     
+                Destroy(buildingGO); 
             }
-            ClearColors();
+            if (forceFieldGO != null) {
+                Destroy(forceFieldGO);     
+            }
         }
     }
 }

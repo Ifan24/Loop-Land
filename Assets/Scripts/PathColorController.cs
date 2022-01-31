@@ -25,4 +25,7 @@ public class PathColorController : MonoBehaviour, Grids
     public void SetToDefaultColor() {
         rd.material.color = defaultColor;
     }
+    private void OnMouseExit() {
+        SetToDefaultColor();
+    }
 }

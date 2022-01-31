@@ -268,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 919957932707078777, guid: 4995b3e72d23f8f4dbe0733b4113c094, type: 3}
   useDestroyCard: 0
+  forceFieldPrefab: {fileID: 5130359424984215170, guid: f7ba0e652af36df4a9c625b127b9d6a7, type: 3}
 --- !u!114 &-3612232411819609126
 MonoBehaviour:
   m_ObjectHideFlags: 0
