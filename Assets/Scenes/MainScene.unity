@@ -10760,7 +10760,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BulletImpact
     clip: {fileID: 8300000, guid: 430a890fb607d471db897c36240711fa, type: 3}
-    volume: 0.5
+    volume: 0.35
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
