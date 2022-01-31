@@ -10,7 +10,14 @@ public class Bullet : MonoBehaviour
     public void SetTarget(GameObject _target) {
         target = _target;
     }
-    
+    private void Start() {
+        if (explosionRadius > 0f) {
+            AudioManager.instance.Play("MissileFire");
+        }
+        else {
+            AudioManager.instance.Play("BulletFire");
+        }
+    }
     // Update is called once per frame
     void Update()
     {

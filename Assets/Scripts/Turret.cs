@@ -31,12 +31,15 @@ public class Turret : MonoBehaviour, Building
     public ParticleSystem laserEffect;
     public Light impactLight;
     public float slowRate;
+    
+    private AudioManager audioManager;
     void Start()
     {
         player = PlayerController.instance;
         // player = GameObject.Find("Player").transform;
         InvokeRepeating("AwakeTurret", 0, awakeFrequency);
         fireCountdown = 1f / fireRate;
+        audioManager = AudioManager.instance;
     }
     
     void AwakeTurret() {
@@ -49,6 +52,11 @@ public class Turret : MonoBehaviour, Building
                 if (target != null) {
                     targetEnemy = target.GetComponent<Enemy>();
                 }
+                // start attack sound
+                if (useLaser) {
+                    audioManager.Play("Laser");
+                }
+        
             }
         }
     }
@@ -62,6 +70,8 @@ public class Turret : MonoBehaviour, Building
                 lineRenderer.enabled = false;
                 laserEffect.Stop();
                 impactLight.enabled = false;
+                // stop attack sound
+                audioManager.Stop("Laser");
             }
             return;
         }
@@ -82,11 +92,11 @@ public class Turret : MonoBehaviour, Building
         }
     }
     private void LaserAttack() {
-        if (targetEnemy != null) {
-            targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
-            targetEnemy.SlowingAttack(slowRate);
-        }
+        if (targetEnemy == null) return;
         
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.SlowingAttack(slowRate);
+
         // attack graphics
         if (!lineRenderer.enabled) {
             laserEffect.Play();
