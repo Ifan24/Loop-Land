@@ -46,6 +46,14 @@ public class PlayerStats : MonoBehaviour
         }
         SetHealthUI();
     }
+    
+    public void GetHeal(float hp) {
+        playerHealth += hp;
+        if (playerHealth > playerMaxHealth) {
+            playerHealth = playerMaxHealth;
+        }
+        SetHealthUI();
+    }
     private void PlayerDie() {
         isDead = true;
         playerController.EnterDieAnimation();

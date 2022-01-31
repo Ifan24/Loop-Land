@@ -35,7 +35,9 @@ public class DropCardManager : MonoBehaviour
     public void DropCard(float enemyMultiplier) {
         foreach(Card card in cards) {
             if (Random.Range(0, 1.0f) < (card.dropRate * enemyMultiplier)) {
-                cardDeck.addCardToDeck(card.gameObject);
+                if (card.gameObject != null) {
+                    cardDeck.addCardToDeck(card.gameObject);
+                }
             }
         }
     }

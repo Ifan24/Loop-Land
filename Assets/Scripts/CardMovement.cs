@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    // public string buildingType;
     private BuildManager buildManager;
     [Header("Default with prefab")]
     public GameObject buildingPrefab;
@@ -18,7 +17,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     public bool useDestroyCard = false;
     private string groundTag = "Ground";
     private string pathTag = "Path";
-    // private List<Grids> prevColliders;
     [Header("Range indicator")]
     public GameObject forceFieldPrefab;
     private GameObject forceFieldGO;
@@ -63,7 +61,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     }
     
     public void OnDrag(PointerEventData eventData) {
-        // show the range of the building
+        // make sure that the building does not has a collider!!
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)) {

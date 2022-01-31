@@ -29,7 +29,7 @@ public class Ground : MonoBehaviour, Grids
         }
         GameObject turretToBuild = buildManager.GetTurretToBuild();
         if (turretToBuild != null) {
-            offset = turretToBuild.GetComponent<Turret>().heightOffset;
+            offset = turretToBuild.GetComponent<Building>().GetheightOffset();
             turret = (GameObject) Instantiate(turretToBuild, GetBuildPosition(), transform.rotation);
             GameObject effectGO = Instantiate(buildEffect, GetBuildPosition(), Quaternion.identity) as GameObject;
             Destroy(effectGO, 5);

@@ -8,6 +8,7 @@ public class BuildManager : MonoBehaviour
     public GameObject standardTurretPrefab;
     public GameObject missileLauncherPrefab;
     public GameObject laserBeamerPrefab;
+    public GameObject hotelPrefab;
     
     public static BuildManager instance;
     private void Awake() {
@@ -22,12 +23,7 @@ public class BuildManager : MonoBehaviour
     public GameObject GetTurretToBuild() {
         return turretToBuild;
     }
-    
-    // public bool BuildTurretOn(Ground ground) {
-    //     GameObject turretGO = Instantiate(turretToBuild, ground.GetBuildPosition(), Quaternion.identity) as GameObject;
-    //     ground.turret = turretGO;
-    //     return true;
-    // }
+
     public void SetTurretToBuild(GameObject turret) {
         turretToBuild = turret;
     }

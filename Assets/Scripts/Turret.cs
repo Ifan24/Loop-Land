@@ -127,8 +127,10 @@ public class Turret : MonoBehaviour, Building
     public float GetRange() {
         return range;
     }
-    
-    void Attack() {
+    public Vector3 GetheightOffset() {
+        return heightOffset;
+    }
+    private void Attack() {
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, bulletPrefab.transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null) {
