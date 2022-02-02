@@ -281,4 +281,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a9d72c58cb62140ab326c4589ddfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropRate: 0.611
+  dropRate: 0.2

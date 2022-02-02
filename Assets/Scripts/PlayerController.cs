@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private Transform faceTarget;
     public float velocity;
     private Enemy targetEnemy;
-    
+    private PlayerStats playerStats;
     
     // Singleton
     public static PlayerController instance;
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         isDiedHash = Animator.StringToHash("isDied");
         
         velocity = 0;
+        playerStats = PlayerStats.instance;
     }
 
     // Update is called once per frame
@@ -119,6 +120,10 @@ public class PlayerController : MonoBehaviour
         }
         if (targetEnemy != null) {
             targetEnemy.TakeDamage(damage);
+            // special case for turtleshell
+            if (targetEnemy.reflectRate > 0) {
+                playerStats.TakeDamage(damage * targetEnemy.reflectRate);
+            }
         }
         playerAnimator.SetBool(isBattleHash, true);
     }

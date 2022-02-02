@@ -27,6 +27,10 @@ public class Enemy : MonoBehaviour
     private Transform targetTransform;
     public float turnSmoothness = 10f;
     // Start is called before the first frame update
+    
+    [Header("Optional for reflect demage")]
+    public float reflectRate = 0f;
+    
     void Start()
     {
         upgradeEnemy();

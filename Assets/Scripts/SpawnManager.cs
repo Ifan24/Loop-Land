@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private List<SpawnEnemy> placeToSpawn;
+    private List<EnemySpawnBuilding> spawnBuildings;
     
     
     public static SpawnManager instance;
@@ -15,6 +16,8 @@ public class SpawnManager : MonoBehaviour
         }
         // Singleton
         instance = this;
+        spawnBuildings = new List<EnemySpawnBuilding>();
+        
     }
     
     
@@ -23,7 +26,6 @@ public class SpawnManager : MonoBehaviour
     {
         placeToSpawn = new List<SpawnEnemy>();
         foreach(GameObject path in GameObject.FindGameObjectsWithTag("Path")) {
-            
             placeToSpawn.Add(path.GetComponent<SpawnEnemy>());
         }
     }
@@ -32,5 +34,14 @@ public class SpawnManager : MonoBehaviour
         foreach(SpawnEnemy path in placeToSpawn) {
             path.SpawnEnemyOnTop();
         }
+        
+        foreach(EnemySpawnBuilding building in spawnBuildings) {
+            building.SpawnEnemy();
+        }
     }
+    
+    public void AddSpawnBuilding(EnemySpawnBuilding building) {
+        spawnBuildings.Add(building);
+    }
+    
 }

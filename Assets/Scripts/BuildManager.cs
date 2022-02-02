@@ -5,11 +5,18 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     private GameObject turretToBuild;
-    public GameObject standardTurretPrefab;
-    public GameObject missileLauncherPrefab;
-    public GameObject laserBeamerPrefab;
-    public GameObject hotelPrefab;
+    // public GameObject standardTurretPrefab;
+    // public GameObject missileLauncherPrefab;
+    // public GameObject laserBeamerPrefab;
+    // public GameObject hotelPrefab;
     
+    
+    /* 
+        To add new building into the game
+        1. create the prefab of the building
+        2. create the prefab of the building card
+        3. add card prefab to the card deck
+    */
     public static BuildManager instance;
     private void Awake() {
         if (instance != null) {

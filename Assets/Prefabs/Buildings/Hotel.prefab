@@ -123,10 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2
-  healPower: 20
+  healPower: 10
   awakeFrequency: 0.3
   heightOffset: {x: 0, y: 1.4, z: 0}
-  fireRate: 1
+  fireRate: 0.2
   healingEffect: {fileID: 3377508621552394365}
 --- !u!1001 &89962482862291293
 PrefabInstance:
