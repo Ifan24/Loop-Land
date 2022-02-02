@@ -10578,6 +10578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad0b601d772b9443ae87ab488c10239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMaxHealth: 200
   healthUI: {fileID: 1526502702}
   healthBar: {fileID: 1296477248}
   isDead: 0

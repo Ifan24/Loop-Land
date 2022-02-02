@@ -4,8 +4,8 @@ using System.Text;
 
 public class PlayerStats : MonoBehaviour
 {
-    public static float playerHealth;
-    public static float playerMaxHealth = 100;
+    private float playerHealth;
+    public float playerMaxHealth = 100;
     public Text healthUI;
     public Image healthBar;
     public bool isDead;
