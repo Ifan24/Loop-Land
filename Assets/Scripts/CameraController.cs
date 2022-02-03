@@ -17,6 +17,8 @@ public class CameraController : MonoBehaviour
     
     private bool disableMovement = false;
     public bool useMouseToMove = false;
+    public Transform centerPoint;
+    public float rotateSpeed = 30.0f;
     // public bool followPlayer = true;
     // public Transform player;
     // public Vector3 offset;
@@ -59,6 +61,12 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A) || (useMouseToMove && Input.mousePosition.x <= panMargin)) {
             transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
+        }
+        if (Input.GetKey(KeyCode.Q)) {
+            transform.RotateAround(centerPoint.position, Vector3.up, rotateSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.E)) {
+            transform.RotateAround(centerPoint.position, Vector3.up, -rotateSpeed * Time.deltaTime);
         }
         
         Vector3 pos = transform.position;

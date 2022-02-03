@@ -281,7 +281,7 @@ MonoBehaviour:
   heightOffset: {x: 0, y: 0.75, z: 0}
   bulletPrefab: {fileID: 6672534164106262805, guid: 7cc5bff6b8b69d1499c88c596cd89cf1, type: 3}
   firePoint: {fileID: 6268579314047758552}
-  fireRate: 1
+  fireRate: 0.8
   useLaser: 0
   damageOverTime: 30
   lineRenderer: {fileID: 0}

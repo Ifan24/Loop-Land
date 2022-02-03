@@ -6,17 +6,19 @@ public class Bullet : MonoBehaviour
     public float explosionRadius = 0.0f;
     public float speed = 70f;
     public float damage = 50.0f;
+    
+    [Header("Required setup fields")]
     public GameObject bulletImpactEffect;
+    // add the sound to the audio manager 
+    // and then add the name of the sound to the prefabs
+    public string fireSound;
+    public string targetHitSound;
+    
     public void SetTarget(GameObject _target) {
         target = _target;
     }
     private void Start() {
-        if (explosionRadius > 0f) {
-            AudioManager.instance.Play("MissileFire");
-        }
-        else {
-            AudioManager.instance.Play("BulletFire");
-        }
+        AudioManager.instance.Play(fireSound);
     }
     // Update is called once per frame
     void Update()
@@ -45,9 +47,9 @@ public class Bullet : MonoBehaviour
             Explode();        
         } else {
             // Just a bullet
-            AudioManager.instance.Play("BulletImpact");
             Damage(target);
         }
+        AudioManager.instance.Play(targetHitSound);
         Destroy(gameObject);
     }
     void Explode() {
@@ -58,7 +60,6 @@ public class Bullet : MonoBehaviour
             }
         }
         CameraShaker.Instance.ShakeOnce(4, 4, 0.1f, 1);
-        AudioManager.instance.Play("Explosion");
     }
     void Damage (GameObject enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
