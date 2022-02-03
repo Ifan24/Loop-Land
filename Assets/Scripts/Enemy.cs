@@ -31,6 +31,11 @@ public class Enemy : MonoBehaviour
     [Header("Optional for reflect demage")]
     public float reflectRate = 0f;
     
+    [Header("Optional for long range enemy")]
+    public float range = 0;
+    public float awakeFrequency = 0.3f;
+    private PlayerController player;
+
     void Start()
     {
         upgradeEnemy();
@@ -43,6 +48,18 @@ public class Enemy : MonoBehaviour
         playerStats = PlayerStats.instance;
         isAttackHash = Animator.StringToHash("isAttack");
         isHitHash = Animator.StringToHash("isHit");
+        
+        if (range > 0) {
+            player = PlayerController.instance;
+            InvokeRepeating("AwakeEnemy", 0, awakeFrequency);
+        }
+    }
+    
+    void AwakeEnemy() {
+        // if distance between player and the enemy is less than the range
+        if ((player.gameObject.transform.position - transform.position).sqrMagnitude < range * range) {
+            SetActive(true, player.gameObject.transform);
+        }
     }
     /// <summary>
     /// Upgrade enemes for each loop the player passed
@@ -119,10 +136,14 @@ public class Enemy : MonoBehaviour
     }
     
     public void SetActive(bool active, Transform _target) {
-        isActive = active;
-        if (active) {
+        if (!isActive && active) {
             enemyAnimator.SetBool("isActive", true);
             targetTransform = _target;
         }
+        isActive = active;
+    }
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

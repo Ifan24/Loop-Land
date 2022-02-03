@@ -674,8 +674,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4338841, y: 2.8798585, z: 1.9827675}
-  m_Center: {x: 0.005290849, y: 0.9962574, z: 0.38603503}
+  m_Size: {x: 1.4338841, y: 2.8798585, z: 2.1727536}
+  m_Center: {x: 0.005290849, y: 0.9962574, z: 0.48102635}
 --- !u!114 &1119500821534581545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,12 +692,14 @@ MonoBehaviour:
   deathEffect: {fileID: 3906030164205266553, guid: 493dc7d355f7d614ca9459ce4f7ff820, type: 3}
   enemyAnimator: {fileID: 3855243661770024534}
   health: 0
-  maxHealth: 300
-  originalAttackFrequency: 0.5
+  maxHealth: 500
+  originalAttackFrequency: 0.7
   damage: 25
   dropCardRate: 2
   turnSmoothness: 10
   reflectRate: 0
+  range: 5
+  awakeFrequency: 0.3
 --- !u!1 &6155605789906299989
 GameObject:
   m_ObjectHideFlags: 0
