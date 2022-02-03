@@ -58,6 +58,9 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         forceFieldGO = (GameObject)Instantiate(forceFieldPrefab, Input.mousePosition, Quaternion.identity);
         forceFieldGO.transform.localScale = new Vector3(forceFieldRange, forceFieldRange, forceFieldRange);
         
+        
+        // stop the game
+        GameSpeedManager.instance.ChangeGameSpeed(0);
     }
     
     public void OnDrag(PointerEventData eventData) {
@@ -108,6 +111,8 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             transform.localScale = origincalScale;
         }
         
+        // start the game
+        GameSpeedManager.instance.ChangeGameSpeedBack();
     }
     private void OnDestroy() {
         // the card got destroy while holding it

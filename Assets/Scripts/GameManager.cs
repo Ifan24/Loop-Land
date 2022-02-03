@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             gameSpeedManager.ChangeGameSpeed(0);
         }
         else {
-            gameSpeedManager.ChangeGameSpeed(gameSpeedManager.prevSpeed);
+            gameSpeedManager.ChangeGameSpeedBack();
         }
     }
     public void GameOver() {
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     
     public void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameSpeedManager.ChangeGameSpeed(gameSpeedManager.prevSpeed);
+        gameSpeedManager.ChangeGameSpeedBack();
     }
     
     public void Menu () {

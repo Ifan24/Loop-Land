@@ -4,7 +4,7 @@ public class GameSpeedManager : MonoBehaviour
 {
     public Color defaultColor;
     public Color currentSpeedColor;
-    public float prevSpeed;
+    private float prevSpeed;
     private bool isPause;
     
     // Singleton
@@ -56,8 +56,11 @@ public class GameSpeedManager : MonoBehaviour
         if (idx > 0) {
             isPause = false;
         }
-        
+        // change the UI
         selectChild(idx);
     }
     
+    public void ChangeGameSpeedBack() {
+        ChangeGameSpeed(prevSpeed);
+    }
 }
