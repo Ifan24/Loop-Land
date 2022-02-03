@@ -62,6 +62,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || (useMouseToMove && Input.mousePosition.x <= panMargin)) {
             transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
         }
+        // rotate around center point
         if (Input.GetKey(KeyCode.Q)) {
             transform.RotateAround(centerPoint.position, Vector3.up, rotateSpeed * Time.deltaTime);
         }
