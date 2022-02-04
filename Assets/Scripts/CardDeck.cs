@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CardDeck : MonoBehaviour
 {
     public List<GameObject> cardPrefabs;
-    public int maxNumberOfCard = 10;
+    [SerializeField] private int maxNumberOfCard = 10;
     
     public static CardDeck instance;
     private void Awake() {

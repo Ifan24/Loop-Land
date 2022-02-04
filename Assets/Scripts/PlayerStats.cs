@@ -5,7 +5,7 @@ using System.Text;
 public class PlayerStats : MonoBehaviour
 {
     private float playerHealth;
-    public float playerMaxHealth = 100;
+    [SerializeField] private float playerMaxHealth = 100;
     public Text healthUI;
     public Image healthBar;
     public bool isDead;

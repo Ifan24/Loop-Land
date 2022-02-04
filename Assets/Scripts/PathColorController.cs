@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 public class PathColorController : MonoBehaviour, Grids
 {
     private Renderer rd;
-    public Color hoverColor;
-    public Color warningColor;
-    public Color rangeColor;
+    [SerializeField] private Color hoverColor;
+    [SerializeField] private Color warningColor;
+    [SerializeField] private Color rangeColor;
     private Color defaultColor;
     private void Start() {
         rd = GetComponent<Renderer>();

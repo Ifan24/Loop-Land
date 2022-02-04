@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class BossSummonManager : MonoBehaviour
 {
-    public static BossSummonManager instance;
-    public int numberOfBuildingToSummon = 100;
-    [SerializeField]
-    private int numberOfBuilding;
+    [SerializeField] private int numberOfBuildingToSummon = 100;
+    [SerializeField] private int numberOfBuilding;
     public Image bossSummonBar;
-    public bool summonBoss;
+    [HideInInspector] public bool summonBoss;
+    
+    public static BossSummonManager instance;
     private void Awake() {
         if (instance != null) {
             Debug.LogError("More than one BossSummonManager in scene!");

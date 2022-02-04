@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hotel : MonoBehaviour, Building
@@ -8,12 +6,12 @@ public class Hotel : MonoBehaviour, Building
     private AudioManager audioManager;
     
     [Header("General")]
-    public float range = 5.0f;
-    public float healPower = 20.0f;
+    [SerializeField] private float range = 5.0f;
+    [SerializeField] private float healPower = 20.0f;
     
-    public float awakeFrequency = 0.3f;
-    public Vector3 heightOffset;
-    public float fireRate = 1f;
+    [SerializeField] private float awakeFrequency = 0.3f;
+    [SerializeField] private Vector3 heightOffset;
+    [SerializeField] private float fireRate = 1f;
     private float fireCountdown;
     private bool isActive;
     

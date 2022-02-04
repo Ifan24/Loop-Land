@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,7 +12,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     private Building BuildingInstance;
     
     [Header("Default No prefab")]
-    public bool useDestroyCard = false;
+    [SerializeField] private bool useDestroyCard = false;
     private string groundTag = "Ground";
     private string pathTag = "Path";
     [Header("Range indicator")]

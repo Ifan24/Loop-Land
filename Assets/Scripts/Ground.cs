@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class Ground : MonoBehaviour, Grids
 {
-    public Color hoverColor;
-    public Color warningColor;
-    public Color rangeColor;
+    [SerializeField] private Color hoverColor;
+    [SerializeField] private Color warningColor;
+    [SerializeField] private Color rangeColor;
     private Vector3 offset;
     private Color defaultColor;
     

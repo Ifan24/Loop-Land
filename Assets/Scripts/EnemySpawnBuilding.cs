@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -6,12 +5,12 @@ using System;
 public class EnemySpawnBuilding : MonoBehaviour, Building
 {
     [Header("Building interface")]
-    public float range = 2.0f;
-    public Vector3 heightOffset;
+    [SerializeField] private float range = 2.0f;
+    [SerializeField] private Vector3 heightOffset;
     
     [Header("Building settings")]
     public GameObject enemyPrefab;
-    public int numberOfEnemyToSpawn = 1;
+    [SerializeField] private int numberOfEnemyToSpawn = 1;
     private List<SpawnEnemy> paths;
     private static System.Random rng = new System.Random();  
 
@@ -56,15 +55,7 @@ public class EnemySpawnBuilding : MonoBehaviour, Building
                     break;
                 }
             }
-            
         }
-        
-        // int idx = Random.Range(0, paths.Count);
-        // paths[idx].SpawnEnemyOnTop(enemyPrefab);
-        
-        // foreach(SpawnEnemy path in paths) {
-        //     path.SpawnEnemyOnTop(enemyPrefab);
-        // }
     }
     
     public void SetRange(int _range) {

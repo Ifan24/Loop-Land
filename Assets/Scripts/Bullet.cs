@@ -3,9 +3,9 @@ using EZCameraShake;
 public class Bullet : MonoBehaviour
 {
     private GameObject target;
-    public float explosionRadius = 0.0f;
-    public float speed = 70f;
-    public float damage = 50.0f;
+    [SerializeField] private float explosionRadius = 0.0f;
+    [SerializeField] private float speed = 70f;
+    [SerializeField] private float damage = 50.0f;
     
     [Header("Required setup fields")]
     public GameObject bulletImpactEffect;

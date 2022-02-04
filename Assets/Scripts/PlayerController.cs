@@ -1,26 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Required components")]
     public Text loopNumber;
-    [SerializeField]
-    private Animator playerAnimator;
+    [SerializeField] private Animator playerAnimator;
     
     private int loopCount = 0;
     [Header("Player attack stats")]
-    public float originalAttackFrequency = 0.5f;
+    [SerializeField] private float originalAttackFrequency = 0.5f;
     private float attackFrequency;
     private float attackCountdown;
-    public float damage = 10.0f;
+    [SerializeField] private float damage = 10.0f;
     
     [Header("Player movement stats")]
-    public float speed;
-    public float waypointStopDistance = 0.1f;
+    [SerializeField] private float speed;
+    [SerializeField] private float waypointStopDistance = 0.1f;
     private Transform target;
     private int waypointsIdx = 0;
     
@@ -35,9 +32,14 @@ public class PlayerController : MonoBehaviour
     private int velocityHash;
     private int isDiedHash;
     public float turnSmoothness = 10.0f;
+    private float velocity;
+    
+    // end of animator variables
+    // =========================
     private Transform faceTarget;
-    public float velocity;
     private Enemy targetEnemy;
+    
+    // singleton manager instances
     private PlayerStats playerStats;
     
     // Singleton

@@ -5,7 +5,7 @@ public class EnemyManager : MonoBehaviour
     [Tooltip("The enemyMultiplies for the current loop")]
     public float enemyMultiplies = 1;
     [Tooltip("Each loop enemy will get stronger by x%")]
-    public float enemyUpgradeRate = 0.05f;
+    [SerializeField] private float enemyUpgradeRate = 0.05f;
     
     public static EnemyManager instance;
     private void Awake() {

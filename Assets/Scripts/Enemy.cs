@@ -10,30 +10,30 @@ public class Enemy : MonoBehaviour
     
     
     [Header("Enemy stats")]
-    public float health;
-    public float maxHealth = 100;
-    public float originalAttackFrequency = 0.5f;
+    [SerializeField] private float health;
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float originalAttackFrequency = 0.5f;
     private float attackFrequency;
     private float attackCountdown;
     private bool isActive;
-    public float damage = 10.0f;
+    [SerializeField] private float damage = 10.0f;
     private bool isDie;
-    public float dropCardRate = 1;
+    [SerializeField] private float dropCardRate = 1;
     
     [Header("Enemy effect")]
     private int isAttackHash;
     private int isHitHash;
     private PlayerStats playerStats;
     private Transform targetTransform;
-    public float turnSmoothness = 10f;
+    [SerializeField] private float turnSmoothness = 10f;
     // Start is called before the first frame update
     
     [Header("Optional for reflect demage")]
     public float reflectRate = 0f;
     
     [Header("Optional for long range enemy")]
-    public float range = 0;
-    public float awakeFrequency = 0.3f;
+    [SerializeField] private float range = 0;
+    [SerializeField] private float awakeFrequency = 0.3f;
     private PlayerController player;
 
     void Start()

@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameSpeedManager : MonoBehaviour
 {
-    public Color defaultColor;
-    public Color currentSpeedColor;
+    [SerializeField] private Color defaultColor;
+    private Color currentSpeedColor;
     private float prevSpeed;
     private bool isPause;
     

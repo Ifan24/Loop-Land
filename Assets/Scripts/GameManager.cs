@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
     public GameObject gamePauseUI;
-    public static bool isGameOver;
+    [HideInInspector] public static bool isGameOver;
     private GameSpeedManager gameSpeedManager;
     public static GameManager instance;
     private void Awake() {

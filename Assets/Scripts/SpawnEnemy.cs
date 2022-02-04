@@ -3,8 +3,8 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public Vector3 offset;
-    public float spawnRate = 0.05f;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private float spawnRate = 0.05f;
     
     private GameObject enemy;
     

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour, Building
@@ -8,29 +6,29 @@ public class Turret : MonoBehaviour, Building
     private PlayerController player;
     
     [Header("General")]
-    public float range = 5.0f;
+    [SerializeField] private float range = 5.0f;
     
     [Header("Unity Setup Field")]
-    public float awakeFrequency = 0.3f;
+    [SerializeField] private float awakeFrequency = 0.3f;
     public Transform partToRotate;
-    public float turnSmoothness = 10f;
+    [SerializeField] private float turnSmoothness = 10f;
     public GameObject activeIndicator;
-    public Vector3 heightOffset;
+    [SerializeField] private Vector3 heightOffset;
     
     [Header("Use Bullets (Default)")]
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireRate = 1f;
+    [SerializeField] private float fireRate = 1f;
     private float fireCountdown;
     private Enemy targetEnemy;
     
     [Header("Use Laser")]
-    public bool useLaser = false;
-    public float damageOverTime = 30;
+    [SerializeField] private bool useLaser = false;
+    [SerializeField] private float damageOverTime = 30;
     public LineRenderer lineRenderer;
     public ParticleSystem laserEffect;
     public Light impactLight;
-    public float slowRate;
+    [SerializeField] private float slowRate;
     
     private AudioManager audioManager;
     void Start()
