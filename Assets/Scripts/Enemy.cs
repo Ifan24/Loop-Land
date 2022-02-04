@@ -21,8 +21,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float dropCardRate = 1;
     
     [Header("Enemy effect")]
+    
+    // animator variables
     private int isAttackHash;
     private int isHitHash;
+    private int isPlayerDieHash;
+    
     private PlayerStats playerStats;
     private Transform targetTransform;
     [SerializeField] private float turnSmoothness = 10f;
@@ -34,6 +38,8 @@ public class Enemy : MonoBehaviour
     [Header("Optional for long range enemy")]
     [SerializeField] private float range = 0;
     [SerializeField] private float awakeFrequency = 0.3f;
+    
+    // Singleton manager instances
     private PlayerController player;
 
     void Start()
@@ -48,6 +54,7 @@ public class Enemy : MonoBehaviour
         playerStats = PlayerStats.instance;
         isAttackHash = Animator.StringToHash("isAttack");
         isHitHash = Animator.StringToHash("isHit");
+        isPlayerDieHash = Animator.StringToHash("isPlayerDie");
         
         if (range > 0) {
             player = PlayerController.instance;
@@ -107,14 +114,23 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isActive || playerStats.isDead) return;
+        
+        // play victory animation and don't do anything
+        if (playerStats.isDead && !enemyAnimator.GetBool(isPlayerDieHash)) {
+            enemyAnimator.SetBool(isAttackHash, false);
+            enemyAnimator.SetBool(isPlayerDieHash, true);
+            
+            return;
+        }
+        
+        if (!isActive) return;
         
         LockOnTarget();
+        
         // reset states
         if (enemyAnimator.GetBool(isAttackHash)) {
             enemyAnimator.SetBool(isAttackHash, false);
         }
-        
         if (attackCountdown <= 0.0f) {
             Attack();
             attackCountdown = 1f / attackFrequency;
