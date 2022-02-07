@@ -40,7 +40,7 @@ public class BossSummonManager : MonoBehaviour
         portalPath.SpawnEnemyOnTop();
         GameObject effectIns = (GameObject)Instantiate(bossSummonEffect, portalPath.transform.position, Quaternion.identity);
         Destroy(effectIns, 5f);
-        portalGO.SetActive(false);
+        // portalGO.SetActive(false);
         AudioManager.instance.Play("BossSummon");
         AudioManager.instance.Stop("BackgroundMusic");
         AudioManager.instance.Play("BossMusic");

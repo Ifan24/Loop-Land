@@ -24,14 +24,20 @@ public class GameSpeedManager : MonoBehaviour
     private void Update() {
         // pause game
         if (Input.GetKeyDown(KeyCode.Space)) {
-            if (isPause) {
-                isPause = false;
+            if (Time.timeScale == 0) {
                 ChangeGameSpeed(prevSpeed);
             }
             else {
-                isPause = true;
                 ChangeGameSpeed(0);
             }
+            // if (isPause) {
+            //     isPause = false;
+            //     ChangeGameSpeed(prevSpeed);
+            // }
+            // else {
+            //     isPause = true;
+            //     ChangeGameSpeed(0);
+            // }
         }
     }
     private void selectChild(int idx) {
@@ -48,7 +54,9 @@ public class GameSpeedManager : MonoBehaviour
         }
     }
     public void ChangeGameSpeed(float gameSpeed) {
-        prevSpeed = Time.timeScale;
+        if (Time.timeScale != 0) {
+            prevSpeed = Time.timeScale;
+        }
         Time.timeScale = gameSpeed;
         
         int idx = Mathf.FloorToInt(gameSpeed);

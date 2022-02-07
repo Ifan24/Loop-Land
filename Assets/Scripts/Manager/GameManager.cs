@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverUI.SetActive(true);
         AudioManager.instance.StopAll();
+        AudioManager.instance.Play("Gameover");
     }
     
     public void Restart() {
