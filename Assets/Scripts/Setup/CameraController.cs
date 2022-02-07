@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     private float MaxZ = 7.0f;
     
     
-    private bool disableMovement = true;
     public bool useMouseToMove = false;
     public Transform centerPoint;
     public float rotateSpeed = 30.0f;
@@ -29,11 +28,10 @@ public class CameraController : MonoBehaviour
         }
         // disable camera movement when press tab key
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            disableMovement = !disableMovement;
             followPlayerVirtualCam.SetActive(!followPlayerVirtualCam.activeSelf);
         }
         
-        if (disableMovement || followPlayerVirtualCam.activeSelf) return;
+        if (followPlayerVirtualCam.activeSelf) return;
         
         // float verticalInput = Input.GetAxis("Vertical");
         // float horizontalInput = Input.GetAxis("Horizontal");
@@ -42,27 +40,27 @@ public class CameraController : MonoBehaviour
         // when press wsad key or when mouse move to the side of the screen
         // move the camera to that direction
         if (Input.GetKey(KeyCode.W) || (useMouseToMove && Input.mousePosition.y >= Screen.height - panMargin)) {
-            wholeMapVirtualCam.transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
+            wholeMapVirtualCam.transform.Translate(Vector3.left * panSpeed * Time.unscaledDeltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.S) || (useMouseToMove && Input.mousePosition.y <= panMargin)) {
-            wholeMapVirtualCam.transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
+            wholeMapVirtualCam.transform.Translate(Vector3.right * panSpeed * Time.unscaledDeltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.D) || (useMouseToMove && Input.mousePosition.x >= Screen.width - panMargin)) {
-            wholeMapVirtualCam.transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
+            wholeMapVirtualCam.transform.Translate(Vector3.forward * panSpeed * Time.unscaledDeltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.A) || (useMouseToMove && Input.mousePosition.x <= panMargin)) {
-            wholeMapVirtualCam.transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
+            wholeMapVirtualCam.transform.Translate(Vector3.back * panSpeed * Time.unscaledDeltaTime, Space.World);
         }
         // rotate around center point
         if (Input.GetKey(KeyCode.Q)) {
-            wholeMapVirtualCam.transform.RotateAround(centerPoint.position, Vector3.up, rotateSpeed * Time.deltaTime);
+            wholeMapVirtualCam.transform.RotateAround(centerPoint.position, Vector3.up, rotateSpeed * Time.unscaledDeltaTime);
         }
         if (Input.GetKey(KeyCode.E)) {
-            wholeMapVirtualCam.transform.RotateAround(centerPoint.position, Vector3.up, -rotateSpeed * Time.deltaTime);
+            wholeMapVirtualCam.transform.RotateAround(centerPoint.position, Vector3.up, -rotateSpeed * Time.unscaledDeltaTime);
         }
         
         Vector3 pos = wholeMapVirtualCam.transform.position;
-        pos.y -= scrollSpeed * scrollInput * Time.deltaTime * 1000;
+        pos.y -= scrollSpeed * scrollInput * Time.unscaledDeltaTime * 1000;
         // clamp the axis so the camera not move too far away
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
