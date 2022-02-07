@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : Singleton<PlayerStats>
 {
     private float playerHealth;
     [SerializeField] private float playerMaxHealth = 100;
@@ -11,15 +11,6 @@ public class PlayerStats : MonoBehaviour
     public bool isDead;
     private StringBuilder builder;
     private PlayerController playerController;
-    public static PlayerStats instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one PlayerStats in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
     
     private void Start() {
         isDead = false;

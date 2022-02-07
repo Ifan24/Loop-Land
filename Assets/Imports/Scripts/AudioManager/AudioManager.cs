@@ -2,34 +2,13 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-
-	public static AudioManager instance;
-
 	public AudioMixerGroup mixerGroup;
-
 	public Sound[] sounds;
-
-	void Awake()
-	{
-		// if (instance != null)
-		// {
-		// 	Destroy(gameObject);
-		// }
-		// else
-		// {
-		// 	instance = this;
-		// 	DontDestroyOnLoad(gameObject);
-		// }
-		if (instance != null) {
-            Debug.LogError("More than one AudioManager in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-        
-		foreach (Sound s in sounds)
+	protected override void Awake() {
+        base.Awake();
+        foreach (Sound s in sounds)
 		{
 			s.source = gameObject.AddComponent<AudioSource>();
 			s.source.clip = s.clip;
@@ -38,7 +17,8 @@ public class AudioManager : MonoBehaviour
 			s.source.outputAudioMixerGroup = mixerGroup;
 		}
 		Play("BackgroundMusic");
-	}
+    }
+    
 	public void Play(string sound)
 	{
 		Sound s = Array.Find(sounds, item => item.name == sound);

@@ -9,20 +9,11 @@ struct Card {
         dropRate = _dropRate;
     }
 }
-public class DropCardManager : MonoBehaviour
+public class DropCardManager : Singleton<DropCardManager>
 {
     // each card has a drop rate and enemy has a drop multiplier
     private CardDeck cardDeck;
     private List<Card> cards;
-    public static DropCardManager instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one DropCardManager in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
     private void Start() {
         cardDeck = CardDeck.instance;
         cards = new List<Card>();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossSummonManager : MonoBehaviour
+public class BossSummonManager : Singleton<BossSummonManager>
 {
     [SerializeField] private int numberOfBuildingToSummon = 100;
     [SerializeField] private int numberOfBuilding;
@@ -12,16 +12,6 @@ public class BossSummonManager : MonoBehaviour
     [SerializeField] private GameObject portalGO;
     [SerializeField] private float minionSummonRange;
     [SerializeField] private GameObject minionPrefab;
-    
-    public static BossSummonManager instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one BossSummonManager in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
     
     private void Start() {
         numberOfBuilding = 0;

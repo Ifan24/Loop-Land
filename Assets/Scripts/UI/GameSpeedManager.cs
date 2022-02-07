@@ -1,20 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class GameSpeedManager : MonoBehaviour
+public class GameSpeedManager : Singleton<GameSpeedManager>
 {
     [SerializeField] private Color defaultColor;
     [SerializeField] private Color currentSpeedColor;
     private float prevSpeed;
-    
-    // Singleton
-    public static GameSpeedManager instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one GameSpeedManager in scene!");
-            return;
-        }
-        instance = this;
-    }
     
     private void Start() {
         prevSpeed = 1;

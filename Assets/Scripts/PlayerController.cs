@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [Header("Required components")]
     public Text loopNumber;
@@ -49,16 +49,6 @@ public class PlayerController : MonoBehaviour
     // singleton manager instances
     private PlayerStats playerStats;
     private AudioManager audioManager;
-    // Singleton
-    public static PlayerController instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one PlayerController in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
     void Start()
     {
         target = Waypoints.waypoints[0];

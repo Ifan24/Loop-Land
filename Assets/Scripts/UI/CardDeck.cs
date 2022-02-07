@@ -1,20 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardDeck : MonoBehaviour
+public class CardDeck : Singleton<CardDeck>
 {
     public List<GameObject> cardPrefabs;
     [SerializeField] private int maxNumberOfCard = 10;
     
-    public static CardDeck instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one CardDeck in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
     private void Update() {
         // too much cards at hand, destroy the first card    
         if (transform.childCount >= maxNumberOfCard) {

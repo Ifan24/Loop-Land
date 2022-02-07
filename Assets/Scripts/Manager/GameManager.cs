@@ -1,21 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject gamePauseUI;
     [HideInInspector] public static bool isGameOver;
     private GameSpeedManager gameSpeedManager;
-    public static GameManager instance;
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one GameManager in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-    }
 
     private void Start() {
         isGameOver = false;

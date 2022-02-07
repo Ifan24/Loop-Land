@@ -2,20 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class cinemachineShake : MonoBehaviour
+public class cinemachineShake : Singleton<cinemachineShake>
 {
     private List<CinemachineBasicMultiChannelPerlin> camNoises;
     private float shakeTimer;
-    public static cinemachineShake instance;
-    
-    private void Awake() {
-        if (instance != null) {
-            Debug.LogError("More than one cinemachineShake in scene!");
-            return;
-        }
-        // Singleton
-        instance = this;
-        
+    protected override void Awake() {
+        base.Awake();
         camNoises = new List<CinemachineBasicMultiChannelPerlin>();
         for(int i = 0; i < transform.childCount; i++) {
             var cam = transform.GetChild(i).GetComponent<CinemachineVirtualCamera>();
@@ -26,7 +18,6 @@ public class cinemachineShake : MonoBehaviour
         }
         shakeTimer = 0;
     }
-    
     public void ShakeCamera(float intensity, float time) {
         setAmplitude(intensity);
         shakeTimer = time;
