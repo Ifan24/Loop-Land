@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
                 Damage(collider.gameObject);
             }
         }
-        cinemachineShake.instance.ShakeCamera(4, 0.2f);
+        cinemachineShake.instance.ShakeCamera(6, 0.25f);
     }
     void Damage (GameObject enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
