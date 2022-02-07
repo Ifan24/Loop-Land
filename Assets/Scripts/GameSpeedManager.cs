@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class GameSpeedManager : MonoBehaviour
 {
     [SerializeField] private Color defaultColor;
-    private Color currentSpeedColor;
+    [SerializeField] private Color currentSpeedColor;
     private float prevSpeed;
     private bool isPause;
     
