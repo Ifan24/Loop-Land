@@ -10,6 +10,8 @@ public class BossSummonManager : MonoBehaviour
     [SerializeField] private SpawnEnemy portalPath;
     [SerializeField] private GameObject bossSummonEffect;
     [SerializeField] private GameObject portalGO;
+    [SerializeField] private float minionSummonRange;
+    [SerializeField] private GameObject minionPrefab;
     
     public static BossSummonManager instance;
     private void Awake() {
@@ -37,10 +39,26 @@ public class BossSummonManager : MonoBehaviour
         }
     }
     private void SummonBoss() {
+        // summon the boss and effect
         portalPath.SpawnEnemyOnTop();
         GameObject effectIns = (GameObject)Instantiate(bossSummonEffect, portalPath.transform.position, Quaternion.identity);
         Destroy(effectIns, 5f);
+        
+        // summon minions
+        Collider[] colliders = Physics.OverlapSphere(portalPath.transform.position, minionSummonRange);
+        foreach(Collider collider in colliders) {
+            if (collider.CompareTag("Path")) {
+                var path = collider.gameObject.GetComponent<SpawnEnemy>();
+                if (path != null) {
+                    path.SpawnEnemyOnTop(minionPrefab);
+                }
+            }
+        }
+        
+        // hide the portal
         // portalGO.SetActive(false);
+        
+        // start boss fight bgm
         AudioManager.instance.Play("BossSummon");
         AudioManager.instance.Stop("BackgroundMusic");
         AudioManager.instance.Play("BossMusic");

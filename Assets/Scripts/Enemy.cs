@@ -23,15 +23,16 @@ public class Enemy : MonoBehaviour
     [Header("Enemy effect")]
     
     // animator variables
-    private int isAttackHash;
-    private int isHitHash;
-    private int isPlayerDieHash;
+    private int attack01Hash;
+    private int attack02Hash;
+    private int hitHash;
+    private int playerDieHash;
     
     private PlayerStats playerStats;
     private Transform targetTransform;
     [SerializeField] private float turnSmoothness = 10f;
     // Start is called before the first frame update
-    
+    private bool triggerOnce;
     [SerializeField] private string enemyHitSound;
     
     [Header("Optional for reflect demage")]
@@ -53,17 +54,19 @@ public class Enemy : MonoBehaviour
         // to avoid divided by 0
         attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
         attackCountdown = 1f / attackFrequency;
-        isAttackHash = Animator.StringToHash("isAttack");
-        isHitHash = Animator.StringToHash("isHit");
-        isPlayerDieHash = Animator.StringToHash("isPlayerDie");
+        attack01Hash = Animator.StringToHash("Attack 01");
+        attack02Hash = Animator.StringToHash("Attack 02");
+        hitHash = Animator.StringToHash("Hit");
+        playerDieHash = Animator.StringToHash("PlayerDie");
         
         if (range > 0) {
             player = PlayerController.instance;
             InvokeRepeating("AwakeEnemy", 0, awakeFrequency);
         }
+        triggerOnce = false;
+        
         audioManager = AudioManager.instance;
         playerStats = PlayerStats.instance;
-        
     }
     
     void AwakeEnemy() {
@@ -83,7 +86,7 @@ public class Enemy : MonoBehaviour
     
     public void TakeDamage(float damage) {
         health -= damage;
-        enemyAnimator.SetBool(isHitHash, true);
+        enemyAnimator.SetTrigger(hitHash);
         if (health <= 0) {
             Die();
         }
@@ -110,19 +113,14 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
     
-    private void LateUpdate() {
-        if (enemyAnimator.GetBool(isHitHash)) {
-            enemyAnimator.SetBool(isHitHash, false);
-        }
-    }
     // Update is called once per frame
     void Update()
     {
         
         // play victory animation and don't do anything
-        if (playerStats.isDead && !enemyAnimator.GetBool(isPlayerDieHash)) {
-            enemyAnimator.SetBool(isAttackHash, false);
-            enemyAnimator.SetBool(isPlayerDieHash, true);
+        if (playerStats.isDead && !triggerOnce) {
+            enemyAnimator.SetTrigger(playerDieHash);
+            triggerOnce = true;
             return;
         }
         
@@ -130,10 +128,6 @@ public class Enemy : MonoBehaviour
         
         LockOnTarget();
         
-        // reset states
-        if (enemyAnimator.GetBool(isAttackHash)) {
-            enemyAnimator.SetBool(isAttackHash, false);
-        }
         if (attackCountdown <= 0.0f) {
             Attack();
             attackCountdown = 1f / attackFrequency;
@@ -144,7 +138,12 @@ public class Enemy : MonoBehaviour
     // attack the player
     private void Attack() {
         if (gameObject != null) {
-            enemyAnimator.SetBool(isAttackHash, true);
+            if (Random.value > 0.5f) {
+                enemyAnimator.SetTrigger(attack01Hash);
+            }
+            else {
+                enemyAnimator.SetTrigger(attack02Hash);
+            }
             audioManager.Play(enemyHitSound);
             playerStats.TakeDamage(damage);
         }
@@ -157,7 +156,7 @@ public class Enemy : MonoBehaviour
     
     public void SetActive(bool active, Transform _target) {
         if (!isActive && active) {
-            enemyAnimator.SetBool("isActive", true);
+            enemyAnimator.SetTrigger("Active");
             targetTransform = _target;
         }
         isActive = active;

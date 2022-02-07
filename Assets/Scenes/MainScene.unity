@@ -9292,13 +9292,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caf6884e7228f743a63bda9b7416dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfBuildingToSummon: 10
+  numberOfBuildingToSummon: 1
   numberOfBuilding: 0
   bossSummonBar: {fileID: 1148924559}
   isBossSummoned: 0
   portalPath: {fileID: 2806217773792271670}
   bossSummonEffect: {fileID: 5158965789522950674, guid: 6b2c9ec6d54ecce478736d11bde10d2b, type: 3}
   portalGO: {fileID: 545898429}
+  minionSummonRange: 3
+  minionPrefab: {fileID: 8251918246440417663, guid: 00b313238d722d347922c13f85162436, type: 3}
 --- !u!4 &504042698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6607617928714214356, guid: e339038f8dc23e94596201d958e4fc9c, type: 3}
