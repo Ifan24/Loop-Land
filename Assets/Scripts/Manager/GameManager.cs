@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOverUI;
-    public GameObject gamePauseUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject gamePauseUI;
     [HideInInspector] public static bool isGameOver;
     private GameSpeedManager gameSpeedManager;
     public static GameManager instance;

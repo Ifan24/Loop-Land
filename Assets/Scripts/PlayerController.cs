@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private float footstepFrequency = 2f;
     private float footstepCountdown;
     
+    [SerializeField] private ParticleSystem hitEffect;
     // singleton manager instances
     private PlayerStats playerStats;
     private AudioManager audioManager;
@@ -136,15 +137,15 @@ public class PlayerController : MonoBehaviour
         if (activeEnemies.Count > 0) {
             targetEnemy = activeEnemies[0].GetComponent<Enemy>();
         }
-        if (targetEnemy != null) {
-            targetEnemy.TakeDamage(damage);
-            // special case for turtleshell
-            if (targetEnemy.reflectRate > 0) {
-                playerStats.TakeDamage(damage * targetEnemy.reflectRate);
-            }
+        if (targetEnemy == null) return;
+        targetEnemy.TakeDamage(damage);
+        // special case for turtleshell
+        if (targetEnemy.reflectRate > 0) {
+            playerStats.TakeDamage(damage * targetEnemy.reflectRate);
         }
         playerAnimator.SetBool(isBattleHash, true);
         audioManager.Play(playerAttackCache);
+        hitEffect.Play();
     }
     private void LockOnTarget() {
         if (faceTarget == null) return;
