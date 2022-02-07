@@ -25,7 +25,10 @@ public class SpawnManager : MonoBehaviour
     {
         placeToSpawn = new List<SpawnEnemy>();
         foreach(GameObject path in GameObject.FindGameObjectsWithTag("Path")) {
-            placeToSpawn.Add(path.GetComponent<SpawnEnemy>());
+            var spawnEnemy = path.GetComponent<SpawnEnemy>();
+            if (spawnEnemy != null) {
+                placeToSpawn.Add(spawnEnemy);
+            }
         }
     }
     

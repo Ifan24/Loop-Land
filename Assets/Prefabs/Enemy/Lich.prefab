@@ -697,6 +697,7 @@ MonoBehaviour:
   damage: 25
   dropCardRate: 2
   turnSmoothness: 10
+  enemyHitSound: LichHit
   reflectRate: 0
   range: 5
   awakeFrequency: 0.3

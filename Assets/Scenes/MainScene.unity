@@ -10441,7 +10441,6 @@ GameObject:
   - component: {fileID: 541923790}
   - component: {fileID: 541923791}
   - component: {fileID: 541923792}
-  - component: {fileID: 541923793}
   - component: {fileID: 541923794}
   m_Layer: 0
   m_Name: GameManager
@@ -10532,83 +10531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32d204ff264c3b4ba0a87755b0f35b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &541923793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541923786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724d867791da5014e8fae2700f7993d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
-  sounds:
-  - name: BackgroundMusic
-    clip: {fileID: 8300000, guid: 0d60be2280dc244908dd843c81666b11, type: 3}
-    volume: 0
-    volumeVariance: 0
-    pitch: 0.1
-    pitchVariance: 0
-    loop: 1
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: Explosion
-    clip: {fileID: 8300000, guid: af2b012ecebc34a91b65a0351bd46cc7, type: 3}
-    volume: 0.35
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: MissileFire
-    clip: {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}
-    volume: 0.35
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: BulletImpact
-    clip: {fileID: 8300000, guid: 430a890fb607d471db897c36240711fa, type: 3}
-    volume: 0.35
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: BulletFire
-    clip: {fileID: 8300000, guid: 3061c7b9b32d894478e4126ccce25ca3, type: 3}
-    volume: 0.35
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: Heal
-    clip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
-    volume: 0.35
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: Laser
-    clip: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
-    volume: 0.1
-    volumeVariance: 0
-    pitch: 1
-    pitchVariance: 0
-    loop: 0
-    mixerGroup: {fileID: 0}
-    source: {fileID: 0}
 --- !u!114 &541923794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21762,8 +21684,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.028254475, y: 0.00038740033, z: -0.00022843477, w: -0.99960065}
-  m_LocalPosition: {x: 0.38082677, y: -0.79422045, z: -0.7239693}
+  m_LocalRotation: {x: 0.2631307, y: 0.04923176, z: -0.109593704, w: -0.9572501}
+  m_LocalPosition: {x: 2.8240302, y: 5.8834667, z: 17.137096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 453203687}
@@ -27821,6 +27743,177 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6607617928714214356, guid: e339038f8dc23e94596201d958e4fc9c, type: 3}
   m_PrefabInstance: {fileID: 1181890981}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1184485243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184485244}
+  - component: {fileID: 1184485245}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1184485244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184485243}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2075195409}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1184485245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184485243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 724d867791da5014e8fae2700f7993d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: BackgroundMusic
+    clip: {fileID: 8300000, guid: 3743191223aa7884aa5f127d9f41d978, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 0.1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: af2b012ecebc34a91b65a0351bd46cc7, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: MissileFire
+    clip: {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BulletImpact
+    clip: {fileID: 8300000, guid: 430a890fb607d471db897c36240711fa, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BulletFire
+    clip: {fileID: 8300000, guid: 3061c7b9b32d894478e4126ccce25ca3, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Heal
+    clip: {fileID: 8300000, guid: c48a972d3d024c2408a3331750786a29, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Laser
+    clip: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Footstep
+    clip: {fileID: 8300000, guid: 05a08dd4ee0c046a6b56466d5c9aa9b8, type: 3}
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0.1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: PlayerAttack
+    clip: {fileID: 8300000, guid: ebe2ea6311c10f14a83349d0059e29a3, type: 3}
+    volume: 0.05
+    volumeVariance: 0.01
+    pitch: 0.85
+    pitchVariance: 0.05
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: EnemyDeath
+    clip: {fileID: 8300000, guid: 3f9a9b6cc3cce6c4ea08241b8c7b7da5, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BossSummon
+    clip: {fileID: 8300000, guid: 4e9a429b5c00f4f2e8234fe5835fef69, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BossMusic
+    clip: {fileID: 8300000, guid: 457771d0864a67842a71c2fb0a3fdc1a, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: EnemyHit
+    clip: {fileID: 8300000, guid: ca056d4afe5e74498a0798f16e0e866d, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: LichHit
+    clip: {fileID: 8300000, guid: 9ae32f8e1a94c486c9929faca77ff03b, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!1001 &1184769346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45404,7 +45497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1910475148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45447,7 +45540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910475147}
-  m_LocalRotation: {x: 0.26380616, y: -0.71128523, z: 0.3362454, w: 0.5580491}
+  m_LocalRotation: {x: 0.2638061, y: -0.71128523, z: 0.33624542, w: 0.55804896}
   m_LocalPosition: {x: 1.51, y: 4.65, z: 6.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -48998,6 +49091,7 @@ Transform:
   - {fileID: 25507253}
   - {fileID: 633330775}
   - {fileID: 541923788}
+  - {fileID: 1184485244}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

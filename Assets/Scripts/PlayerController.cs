@@ -40,9 +40,14 @@ public class PlayerController : MonoBehaviour
     private Transform faceTarget;
     private Enemy targetEnemy;
     
+    private const string playerAttackCache = "PlayerAttack";
+    private const string footstepCache = "Footstep";
+    private float footstepFrequency = 2f;
+    private float footstepCountdown;
+    
     // singleton manager instances
     private PlayerStats playerStats;
-    
+    private AudioManager audioManager;
     // Singleton
     public static PlayerController instance;
     private void Awake() {
@@ -67,6 +72,7 @@ public class PlayerController : MonoBehaviour
         
         velocity = 0;
         playerStats = PlayerStats.instance;
+        audioManager = AudioManager.instance;
     }
 
     // Update is called once per frame
@@ -95,6 +101,12 @@ public class PlayerController : MonoBehaviour
             // if (followPlayerVirtualCam.activeSelf) {
             //     followPlayerVirtualCam.SetActive(false);
             // }
+            if (footstepCountdown <= 0.0f) {
+                audioManager.Play(footstepCache);
+                footstepCountdown = 1f / footstepFrequency;
+            }
+            footstepCountdown -= Time.deltaTime;
+        
         } 
         // not walking or running states
         else {
@@ -132,6 +144,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         playerAnimator.SetBool(isBattleHash, true);
+        audioManager.Play(playerAttackCache);
     }
     private void LockOnTarget() {
         if (faceTarget == null) return;

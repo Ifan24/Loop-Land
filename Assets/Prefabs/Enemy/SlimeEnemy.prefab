@@ -697,7 +697,10 @@ MonoBehaviour:
   damage: 10
   dropCardRate: 1
   turnSmoothness: 10
+  enemyHitSound: EnemyHit
   reflectRate: 0
+  range: 0
+  awakeFrequency: 0.3
 --- !u!65 &5112335414172335989
 BoxCollider:
   m_ObjectHideFlags: 0

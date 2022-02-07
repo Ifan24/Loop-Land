@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float turnSmoothness = 10f;
     // Start is called before the first frame update
     
+    [SerializeField] private string enemyHitSound;
+    
     [Header("Optional for reflect demage")]
     public float reflectRate = 0f;
     
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
     
     // Singleton manager instances
     private PlayerController player;
-
+    private AudioManager audioManager;
     void Start()
     {
         upgradeEnemy();
@@ -51,7 +53,6 @@ public class Enemy : MonoBehaviour
         // to avoid divided by 0
         attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
         attackCountdown = 1f / attackFrequency;
-        playerStats = PlayerStats.instance;
         isAttackHash = Animator.StringToHash("isAttack");
         isHitHash = Animator.StringToHash("isHit");
         isPlayerDieHash = Animator.StringToHash("isPlayerDie");
@@ -60,6 +61,9 @@ public class Enemy : MonoBehaviour
             player = PlayerController.instance;
             InvokeRepeating("AwakeEnemy", 0, awakeFrequency);
         }
+        audioManager = AudioManager.instance;
+        playerStats = PlayerStats.instance;
+        
     }
     
     void AwakeEnemy() {
@@ -119,11 +123,10 @@ public class Enemy : MonoBehaviour
         if (playerStats.isDead && !enemyAnimator.GetBool(isPlayerDieHash)) {
             enemyAnimator.SetBool(isAttackHash, false);
             enemyAnimator.SetBool(isPlayerDieHash, true);
-            
             return;
         }
         
-        if (!isActive) return;
+        if (playerStats.isDead || !isActive) return;
         
         LockOnTarget();
         
@@ -142,6 +145,7 @@ public class Enemy : MonoBehaviour
     private void Attack() {
         if (gameObject != null) {
             enemyAnimator.SetBool(isAttackHash, true);
+            audioManager.Play(enemyHitSound);
             playerStats.TakeDamage(damage);
         }
     }
