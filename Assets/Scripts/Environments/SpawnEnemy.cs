@@ -14,22 +14,24 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         if (isSpawnOnStart) {
-            SpawnEnemyOnTop();
+            SpawnObjectOnTop();
         }
     }
 
-    // return true if spawn a enemy on top
-    public bool SpawnEnemyOnTop(GameObject enemyToSpawn = null) {
+    // return true if spawn a enemy on top (default) 
+    public bool SpawnObjectOnTop(GameObject enemyToSpawn = null, Vector3? objectOffset = null) {
         // Only spawn one enemy for each path for now
         if (enemy != null) return false;
+        Vector3 useOffset = objectOffset == null ? offset : objectOffset.Value;
         
-        
+        // use the prefab passed in
         if (enemyToSpawn != null) {
-            enemy = (GameObject)Instantiate(enemyToSpawn, transform.position + offset, enemyPrefab.transform.rotation);
+            enemy = (GameObject)Instantiate(enemyToSpawn, transform.position + useOffset, enemyPrefab.transform.rotation);
             return true;
         }
+        
         if (Random.Range(0, 1.0f) <= spawnRate) {
-            enemy = (GameObject)Instantiate(enemyPrefab, transform.position + offset, enemyPrefab.transform.rotation);
+            enemy = (GameObject)Instantiate(enemyPrefab, transform.position + useOffset, enemyPrefab.transform.rotation);
             return true;
         }
         return false;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hotel : MonoBehaviour, Building
@@ -12,12 +13,23 @@ public class Hotel : MonoBehaviour, Building
     [SerializeField] private float awakeFrequency = 0.3f;
     [SerializeField] private Vector3 heightOffset;
     [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float potionGenerateRate = 0.3f;
+    
     private float fireCountdown;
+    private float potionGenerateCountdown;
+    
     private bool isActive;
     
     [Header("Unity Setup Field")]
-    public GameObject healingEffect;
+    [SerializeField] private GameObject healingEffect;
+    [SerializeField] private GameObject potionPrefab;
+    [SerializeField] private Vector3 potionOffset;
+    
+    [SerializeField] private int numberOfPotionToSpawn;
+    private static System.Random rng = new System.Random();  
+    private List<SpawnEnemy> paths;
     private PlayerStats playerStats;
+    
     void Start()
     {
         player = PlayerController.instance;
@@ -25,7 +37,20 @@ public class Hotel : MonoBehaviour, Building
         isActive = false;
         InvokeRepeating("AwakeTurret", 0, awakeFrequency);
         fireCountdown = 1f / fireRate;
+        potionGenerateCountdown = 1f / potionGenerateRate;
+        
         audioManager = AudioManager.instance;
+        
+        paths = new List<SpawnEnemy>();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        foreach(Collider collider in colliders) {
+            if (collider.CompareTag("Path")) {
+                var path = collider.gameObject.GetComponent<SpawnEnemy>();
+                if (path != null) {
+                    paths.Add(path);
+                }
+            }
+        }
     }
 
     void AwakeTurret() {    
@@ -35,6 +60,14 @@ public class Hotel : MonoBehaviour, Building
     // Update is called once per frame
     void Update()
     {
+        // place potion around the hotel
+        if (potionGenerateCountdown <= 0.0f) {
+            SpawnPotion();
+            potionGenerateCountdown = 1f / potionGenerateRate;
+        }
+        potionGenerateCountdown -= Time.deltaTime;
+        
+        // active heal the player
         if (!isActive) {
             if (healingEffect.activeSelf) {
                 healingEffect.SetActive(false);
@@ -56,7 +89,33 @@ public class Hotel : MonoBehaviour, Building
         audioManager.Play("Heal");
         playerStats.GetHeal(healPower);
     }
+    public void Shuffle (List<SpawnEnemy> list) {  
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            int k = rng.Next(n + 1);  
+            SpawnEnemy value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
+    }
     
+    
+    public void SpawnPotion() {
+        if (Mathf.Approximately(range, 0) || paths.Count == 0) return;
+        
+        // tried to randomly spawn n potion around
+        Shuffle(paths);
+        int count = 0;
+        foreach(SpawnEnemy path in paths) {
+            if (path.SpawnObjectOnTop(potionPrefab, potionOffset)) {
+                count++;
+                if (count >= numberOfPotionToSpawn) {
+                    break;
+                }
+            }
+        }
+    }
     
     public void SetRange(int _range) {
         range = _range;

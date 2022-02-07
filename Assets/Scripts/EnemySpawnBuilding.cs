@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
     
 public class EnemySpawnBuilding : MonoBehaviour, Building
 {
@@ -49,7 +48,7 @@ public class EnemySpawnBuilding : MonoBehaviour, Building
         Shuffle(paths);
         int count = 0;
         foreach(SpawnEnemy path in paths) {
-            if (path.SpawnEnemyOnTop(enemyPrefab)) {
+            if (path.SpawnObjectOnTop(enemyPrefab)) {
                 count++;
                 if (count >= numberOfEnemyToSpawn) {
                     break;

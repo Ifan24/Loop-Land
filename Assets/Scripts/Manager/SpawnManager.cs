@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     
     public void SpawnEnemies() {
         foreach(SpawnEnemy path in placeToSpawn) {
-            path.SpawnEnemyOnTop();
+            path.SpawnObjectOnTop();
         }
         
         foreach(EnemySpawnBuilding building in spawnBuildings) {

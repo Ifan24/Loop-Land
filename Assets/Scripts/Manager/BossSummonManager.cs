@@ -40,7 +40,7 @@ public class BossSummonManager : MonoBehaviour
     }
     private void SummonBoss() {
         // summon the boss and effect
-        portalPath.SpawnEnemyOnTop();
+        portalPath.SpawnObjectOnTop();
         GameObject effectIns = (GameObject)Instantiate(bossSummonEffect, portalPath.transform.position, Quaternion.identity);
         Destroy(effectIns, 5f);
         
@@ -50,7 +50,7 @@ public class BossSummonManager : MonoBehaviour
             if (collider.CompareTag("Path")) {
                 var path = collider.gameObject.GetComponent<SpawnEnemy>();
                 if (path != null) {
-                    path.SpawnEnemyOnTop(minionPrefab);
+                    path.SpawnObjectOnTop(minionPrefab);
                 }
             }
         }

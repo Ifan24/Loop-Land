@@ -34,7 +34,7 @@ public class cinemachineShake : MonoBehaviour
     
     private void Update() {
         if (shakeTimer > 0) {
-            shakeTimer -= Time.deltaTime;
+            shakeTimer -= Time.unscaledDeltaTime;
             if (shakeTimer <= 0f) {
                setAmplitude(0);
             }

@@ -30412,16 +30412,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4879767928628000525, guid: 605076abc3162e04aa14de8684a5ab5b, type: 3}
-      propertyPath: range
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879767928628000525, guid: 605076abc3162e04aa14de8684a5ab5b, type: 3}
-      propertyPath: fireRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4879767928628000525, guid: 605076abc3162e04aa14de8684a5ab5b, type: 3}
-      propertyPath: healPower
-      value: 15
+      propertyPath: potionGenerateRate
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 605076abc3162e04aa14de8684a5ab5b, type: 3}

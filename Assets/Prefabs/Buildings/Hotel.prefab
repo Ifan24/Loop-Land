@@ -122,12 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22c8bb294dfdf243b8dac879270e5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
-  healPower: 10
+  range: 1.5
+  healPower: 15
   awakeFrequency: 0.3
   heightOffset: {x: 0, y: 1.4, z: 0}
-  fireRate: 0.2
+  fireRate: 0.5
+  potionGenerateRate: 0.3
   healingEffect: {fileID: 3377508621552394365}
+  potionPrefab: {fileID: 2592851088437801845, guid: 7af7c599f0c879d40add9b98b769df1f, type: 3}
+  potionOffset: {x: 0, y: 0.5, z: 0}
+  numberOfPotionToSpawn: 1
 --- !u!1001 &89962482862291293
 PrefabInstance:
   m_ObjectHideFlags: 0
