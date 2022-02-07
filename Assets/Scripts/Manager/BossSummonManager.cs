@@ -45,13 +45,11 @@ public class BossSummonManager : MonoBehaviour
         Destroy(effectIns, 5f);
         
         // summon minions
-        Collider[] colliders = Physics.OverlapSphere(portalPath.transform.position, minionSummonRange);
-        foreach(Collider collider in colliders) {
-            if (collider.CompareTag("Path")) {
-                var path = collider.gameObject.GetComponent<SpawnEnemy>();
-                if (path != null) {
-                    path.SpawnObjectOnTop(minionPrefab);
-                }
+        
+        foreach(Collider collider in Utilities.GetCollidersAtWithTag(portalPath.transform.position, minionSummonRange, "Path")) {
+            SpawnEnemy path = collider.gameObject.GetComponent<SpawnEnemy>();
+            if (path != null) {
+                path.SpawnObjectOnTop(minionPrefab);
             }
         }
         

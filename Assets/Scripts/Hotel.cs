@@ -26,7 +26,6 @@ public class Hotel : MonoBehaviour, Building
     [SerializeField] private Vector3 potionOffset;
     
     [SerializeField] private int numberOfPotionToSpawn;
-    private static System.Random rng = new System.Random();  
     private List<SpawnEnemy> paths;
     private PlayerStats playerStats;
     
@@ -42,13 +41,11 @@ public class Hotel : MonoBehaviour, Building
         audioManager = AudioManager.instance;
         
         paths = new List<SpawnEnemy>();
-        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach(Collider collider in colliders) {
-            if (collider.CompareTag("Path")) {
-                var path = collider.gameObject.GetComponent<SpawnEnemy>();
-                if (path != null) {
-                    paths.Add(path);
-                }
+        
+        foreach(Collider collider in Utilities.GetCollidersAtWithTag(transform.position, range, "Path")) {
+            SpawnEnemy path = collider.gameObject.GetComponent<SpawnEnemy>();
+            if (path != null) {
+                paths.Add(path);
             }
         }
     }
@@ -89,23 +86,12 @@ public class Hotel : MonoBehaviour, Building
         audioManager.Play("Heal");
         playerStats.GetHeal(healPower);
     }
-    public void Shuffle (List<SpawnEnemy> list) {  
-        int n = list.Count;  
-        while (n > 1) {  
-            n--;  
-            int k = rng.Next(n + 1);  
-            SpawnEnemy value = list[k];  
-            list[k] = list[n];  
-            list[n] = value;  
-        }  
-    }
-    
     
     public void SpawnPotion() {
         if (Mathf.Approximately(range, 0) || paths.Count == 0) return;
         
         // tried to randomly spawn n potion around
-        Shuffle(paths);
+        Utilities.Shuffle(paths);
         int count = 0;
         foreach(SpawnEnemy path in paths) {
             if (path.SpawnObjectOnTop(potionPrefab, potionOffset)) {

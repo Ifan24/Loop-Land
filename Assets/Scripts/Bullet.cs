@@ -1,5 +1,5 @@
 using UnityEngine;
-using EZCameraShake;
+
 public class Bullet : MonoBehaviour
 {
     private GameObject target;
@@ -53,11 +53,8 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
     void Explode() {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach(Collider collider in colliders) {
-            if (collider.CompareTag("Enemy")) {
-                Damage(collider.gameObject);
-            }
+        foreach(Collider collider in Utilities.GetCollidersAtWithTag(transform.position, explosionRadius, "Enemy")) {
+            Damage(collider.gameObject);
         }
         cinemachineShake.instance.ShakeCamera(6, 0.25f);
     }
