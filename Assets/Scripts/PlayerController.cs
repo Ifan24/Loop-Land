@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Required components")]
     public Text loopNumber;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private GameObject followPlayerVirtualCam;
     
     private int loopCount = 0;
     [Header("Player attack stats")]
@@ -91,6 +92,9 @@ public class PlayerController : MonoBehaviour
             velocity += speed * Time.deltaTime;
             
             followWaypoints();
+            // if (followPlayerVirtualCam.activeSelf) {
+            //     followPlayerVirtualCam.SetActive(false);
+            // }
         } 
         // not walking or running states
         else {
@@ -178,6 +182,8 @@ public class PlayerController : MonoBehaviour
             // setup attack frequency
             attackFrequency = Mathf.Max(0.00001f, originalAttackFrequency);
             attackCountdown = 1f / attackFrequency;
+            
+            // followPlayerVirtualCam.SetActive(true);
         }
     }
     
