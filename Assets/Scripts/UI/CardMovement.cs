@@ -19,6 +19,11 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     public GameObject forceFieldPrefab;
     private GameObject forceFieldGO;
     private float buildingRange;
+    
+    // cache the raycast variables
+    private Ray ray;
+    private RaycastHit hit;
+    private int groundLayerMask = (1 << 8);
     private void Start() {
         buildManager = BuildManager.instance;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -63,9 +68,10 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     
     public void OnDrag(PointerEventData eventData) {
         // make sure that the building does not has a collider!!
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit)) {
+        
+        // only collides with ground layer
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) {
             if (!useDestroyCard) {
                 buildingGO.transform.position = hit.point;
                 forceFieldGO.transform.position = hit.point;
@@ -81,11 +87,9 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
             Destroy(buildingGO);
             Destroy(forceFieldGO);
         }
-        // TODO: use the last ray cast result
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        ray = cam.ScreenPointToRay(Input.mousePosition);
         bool failToPlace = true;
-        if (Physics.Raycast(ray, out hit)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) {
             if (hit.transform.gameObject.CompareTag(groundTag)) {
                 Ground ground = hit.transform.gameObject.GetComponent<Ground>();
                 // successfully place a card there

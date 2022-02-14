@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7989711828385038657}
   - component: {fileID: -6417154262127055759}
   - component: {fileID: 1515744179824860674}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Path
   m_TagString: Path
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5979969563378122779}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -112,6 +112,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5543102610799708957, guid: 208fbc04236b97949af6275c22b75c5f, type: 3}
   offset: {x: 0, y: 0.2, z: 0}
   spawnRate: 0.05
+  isSpawnOnStart: 1
 --- !u!114 &1515744179824860674
 MonoBehaviour:
   m_ObjectHideFlags: 0
