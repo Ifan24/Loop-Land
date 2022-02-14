@@ -22,6 +22,7 @@ public class DissolveCard : MonoBehaviour
         image.material = dissolveMaterial;
         dissolveMaterial.SetFloat(progressCache, 1);
         isDissolving = true;
+        GetComponent<CardMovement>().enabled = false;
         GetComponentInChildren<Text>().enabled = false;
     }
     
