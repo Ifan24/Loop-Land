@@ -127,7 +127,7 @@ MonoBehaviour:
   awakeFrequency: 0.3
   heightOffset: {x: 0, y: 1.4, z: 0}
   fireRate: 0.5
-  potionGenerateRate: 0.3
+  potionGenerateRate: 0.1
   healingEffect: {fileID: 3377508621552394365}
   potionPrefab: {fileID: 2592851088437801845, guid: 7af7c599f0c879d40add9b98b769df1f, type: 3}
   potionOffset: {x: 0, y: 0.5, z: 0}
