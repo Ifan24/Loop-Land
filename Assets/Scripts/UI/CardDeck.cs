@@ -4,13 +4,23 @@ using UnityEngine;
 public class CardDeck : Singleton<CardDeck>
 {
     public List<GameObject> cardPrefabs;
+    [SerializeField] private Transform dissolveLayer;
     [SerializeField] private int maxNumberOfCard = 10;
     
     private void Update() {
         // too much cards at hand, destroy the first card    
         if (transform.childCount >= maxNumberOfCard) {
-            // TODO: some effects?
-            Destroy(transform.GetChild(0).gameObject);
+            // Destroy(transform.GetChild(0).gameObject);
+            // dissolve effect
+            GameObject firstChild = transform.GetChild(0).gameObject;
+            DissolveCard dissolveCard = firstChild.GetComponent<DissolveCard>();
+            if (dissolveCard != null) {
+                dissolveCard.DissolveCardNow();
+                firstChild.transform.SetParent(dissolveLayer);
+            }
+            else {
+                Destroy(transform.GetChild(0).gameObject);
+            }
         }
     }
     // To add card to deck

@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 4534533912209313204}
   - component: {fileID: 4534533912209313205}
   - component: {fileID: 2973288269928726343}
+  - component: {fileID: -623461427990323876}
   m_Layer: 5
   m_Name: HotelCard
   m_TagString: Untagged
@@ -282,3 +283,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropRate: 0.2
+--- !u!114 &-623461427990323876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534533912209313207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f50c2ebfd8a8a438253b07c16b6faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 2100000, guid: 5a0e9086bd6bbf245bd506367fc008db, type: 2}
+  dissolveTime: 1
