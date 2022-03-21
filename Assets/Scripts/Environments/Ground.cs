@@ -17,7 +17,8 @@ public class Ground : Grids
     }
     
     public bool PlaceBuilding() {
-        if (EventSystem.current.IsPointerOverGameObject() || turret != null) {
+        // if (EventSystem.current.IsPointerOverGameObject() || turret != null) {
+        if (turret != null) {
             return false;
         }
         GameObject turretToBuild = buildManager.GetTurretToBuild();
