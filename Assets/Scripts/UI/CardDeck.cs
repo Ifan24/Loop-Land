@@ -28,6 +28,6 @@ public class CardDeck : Singleton<CardDeck>
     // then call this method and use the public prefab to add card to deck
     public void addCardToDeck(GameObject cardPrefab) {
         GameObject obj = Instantiate(cardPrefab) as GameObject;
-        obj.transform.SetParent(transform);
+        obj.transform.SetParent(transform, false);
     }
 }
