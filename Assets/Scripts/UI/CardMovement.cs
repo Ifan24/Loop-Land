@@ -25,6 +25,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     private Ray ray;
     private RaycastHit hit;
     private int gridsLayerMask = (1 << 8);
+    private bool changeSpeedBack;
     private void Start() {
         buildManager = BuildManager.instance;
         cardHighLightManager = CardHighLightManager.instance;
@@ -32,6 +33,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         if (cam == null) {
             Debug.LogError("No main camera in the scene!");
         }
+        changeSpeedBack = true;
     }
     public void OnBeginDrag(PointerEventData eventData) {
         // make the card invisible
@@ -65,6 +67,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         
         
         // stop the game
+        if (Time.timeScale == 0) changeSpeedBack = false;
         GameSpeedManager.instance.ChangeGameSpeed(0);
     }
     
@@ -119,7 +122,10 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         }
         
         // start the game
-        GameSpeedManager.instance.ChangeGameSpeedBack();
+        if (changeSpeedBack) {
+            GameSpeedManager.instance.ChangeGameSpeedBack();
+        }
+
     }
     private void OnDestroy() {
         // the card got destroy while holding it

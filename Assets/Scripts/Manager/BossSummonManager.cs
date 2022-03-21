@@ -12,7 +12,7 @@ public class BossSummonManager : Singleton<BossSummonManager>
     [SerializeField] private GameObject portalGO;
     [SerializeField] private float minionSummonRange;
     [SerializeField] private GameObject minionPrefab;
-    
+    [SerializeField] private GameObject followPlayerVirtualCam;
     private void Start() {
         numberOfBuilding = 0;
         bossSummonBar.fillAmount = 0;
@@ -29,6 +29,9 @@ public class BossSummonManager : Singleton<BossSummonManager>
         }
     }
     private void SummonBoss() {
+        // change camera mode
+        followPlayerVirtualCam.SetActive(false);
+        
         // summon the boss and effect
         portalPath.SpawnObjectOnTop();
         GameObject effectIns = (GameObject)Instantiate(bossSummonEffect, portalPath.transform.position, Quaternion.identity);
@@ -50,6 +53,7 @@ public class BossSummonManager : Singleton<BossSummonManager>
         AudioManager.instance.Play("BossSummon");
         AudioManager.instance.Stop("BackgroundMusic");
         AudioManager.instance.Play("BossMusic");
+        
     }
     
     
