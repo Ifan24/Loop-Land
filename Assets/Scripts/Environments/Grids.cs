@@ -9,11 +9,12 @@ public class Grids : MonoBehaviour {
     [SerializeField] protected Color rangeColor;
     protected Color defaultColor;
     protected Renderer rd;
-    
+    CardHighLightManager cardHighLightManager;
     protected virtual void Start() {
         rd = GetComponent<Renderer>();
         defaultColor = rd.material.color;
         hasBuilding = false;
+        cardHighLightManager = CardHighLightManager.instance;
     }
     // when dragging a card and hover over a ground with building
     // show warning color
@@ -43,8 +44,11 @@ public class Grids : MonoBehaviour {
         //     return;
         // }
         rd.material.color = hoverColor;
+        // cardHighLightManager.SetActiveGrid(this);
+        
     }
     private void OnMouseExit() {
         SetToDefaultColor();
+        // cardHighLightManager.DeactivateGrid();
     }
 }

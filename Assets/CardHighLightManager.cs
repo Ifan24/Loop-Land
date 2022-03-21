@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class CardHighLightManager : Singleton<CardHighLightManager>
 {
+    private Grids activeGrid;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void SetActiveGrid(Grids grid) {
+        if (grid == null || activeGrid == grid) return;
+        if (activeGrid != null) {
+            activeGrid.SetToDefaultColor();
+        }
+        activeGrid = grid;
+        activeGrid.CardHoverIndicator();
+    }
+    
+    public void DeactivateGrid() {
+        if (activeGrid != null) {
+            activeGrid.SetToDefaultColor();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -10,11 +10,12 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     private Vector3 origincalScale;
     private Camera cam;
     private Building BuildingInstance;
+    private CardHighLightManager cardHighLightManager;
     
     [Header("Default No prefab")]
     [SerializeField] private bool useDestroyCard = false;
     private string groundTag = "Ground";
-    private string pathTag = "Path";
+    // private string pathTag = "Path";
     [Header("Range indicator")]
     public GameObject forceFieldPrefab;
     private GameObject forceFieldGO;
@@ -23,9 +24,10 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     // cache the raycast variables
     private Ray ray;
     private RaycastHit hit;
-    private int groundLayerMask = (1 << 8);
+    private int gridsLayerMask = (1 << 8);
     private void Start() {
         buildManager = BuildManager.instance;
+        cardHighLightManager = CardHighLightManager.instance;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         if (cam == null) {
             Debug.LogError("No main camera in the scene!");
@@ -71,14 +73,15 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         
         // only collides with ground layer
         ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, gridsLayerMask)) {
             if (!useDestroyCard) {
                 buildingGO.transform.position = hit.point;
                 forceFieldGO.transform.position = hit.point;
             }
-            if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(pathTag)) {
-                hit.transform.GetComponent<Grids>().CardHoverIndicator();
-            }
+            cardHighLightManager.SetActiveGrid(hit.transform.GetComponent<Grids>());
+            // if (hit.transform.gameObject.CompareTag(groundTag) || hit.transform.gameObject.CompareTag(pathTag)) {
+            //     // hit.transform.GetComponent<Grids>().CardHoverIndicator();
+            // }
         }
         
     }
@@ -89,7 +92,7 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         }
         ray = cam.ScreenPointToRay(Input.mousePosition);
         bool failToPlace = true;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, gridsLayerMask)) {
             if (hit.transform.gameObject.CompareTag(groundTag)) {
                 Ground ground = hit.transform.gameObject.GetComponent<Ground>();
                 // successfully place a card there
@@ -108,6 +111,8 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                 }
             }
         }
+        
+        cardHighLightManager.DeactivateGrid();
         // revert any changes
         if (failToPlace) {
             transform.localScale = origincalScale;
