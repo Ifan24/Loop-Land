@@ -112,7 +112,6 @@ public class CardMovement : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
                         Destroy(gameObject);
                     }
                 }
-                Debug.Log("failToPlace: " + failToPlace);
             }
         }
         
