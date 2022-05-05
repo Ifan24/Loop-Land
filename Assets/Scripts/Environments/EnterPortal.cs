@@ -5,7 +5,9 @@ public class EnterPortal : MonoBehaviour
     [SerializeField] private GameObject goBackButton;
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            GameSpeedManager.instance.ChangeGameSpeed(0);
+            if (GameManager.instance.stopAtPortal) {
+                GameSpeedManager.instance.ChangeGameSpeed(0);
+            }
             goBackButton.SetActive(true);
         }
     }

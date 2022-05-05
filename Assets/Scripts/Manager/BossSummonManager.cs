@@ -13,6 +13,8 @@ public class BossSummonManager : Singleton<BossSummonManager>
     [SerializeField] private float minionSummonRange;
     [SerializeField] private GameObject minionPrefab;
     [SerializeField] private GameObject followPlayerVirtualCam;
+    [SerializeField] private GameObject duststormParticle;
+    
     private void Start() {
         numberOfBuilding = 0;
         bossSummonBar.fillAmount = 0;
@@ -46,6 +48,7 @@ public class BossSummonManager : Singleton<BossSummonManager>
             }
         }
         
+        duststormParticle.SetActive(true);
         // hide the portal
         // portalGO.SetActive(false);
         
