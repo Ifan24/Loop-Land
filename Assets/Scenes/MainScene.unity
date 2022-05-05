@@ -6676,6 +6676,8 @@ Transform:
   m_PrefabInstance: {fileID: 801504531}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &362944152
+<<<<<<< HEAD
+=======
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6899,6 +6901,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 367597080}
   m_CullTransparentMesh: 1
 --- !u!1001 &368371091
+>>>>>>> d3feecd3e607aa932c8c6baff96bbd5d1675bd0c
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
