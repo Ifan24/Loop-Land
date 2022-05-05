@@ -29,16 +29,18 @@ public class Turret : MonoBehaviour, Building
     public ParticleSystem laserEffect;
     public Light impactLight;
     [SerializeField] private float slowRate;
-    
+    private bool withinRange;
     private AudioManager audioManager;
     void Start()
     {
         player = PlayerController.instance;
-        // player = GameObject.Find("Player").transform;
+        withinRange = false;
         InvokeRepeating("AwakeTurret", 0, awakeFrequency);
         fireCountdown = 1f / fireRate;
         audioManager = AudioManager.instance;
     }
+    
+    [SerializeField] private GameObject linkToPlayerPrefab;
     
     void AwakeTurret() {
         // if distance between player and the turret is less than the range
@@ -54,13 +56,23 @@ public class Turret : MonoBehaviour, Building
                 if (useLaser) {
                     audioManager.Play("Laser");
                 }
-        
             }
+            withinRange = true;
+        }
+        else {
+            withinRange = false;
         }
     }
     // Update is called once per frame
     void Update()
     {
+        if (withinRange && !linkToPlayerPrefab.activeSelf) {
+            linkToPlayerPrefab.SetActive(true);
+        }
+        if (!withinRange && linkToPlayerPrefab.activeSelf) {
+            linkToPlayerPrefab.SetActive(false);
+        }
+        
         if (target == null) {
             //TODO: random rotate the head
             activeIndicator.SetActive(false);

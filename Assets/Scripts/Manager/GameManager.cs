@@ -6,11 +6,18 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject gamePauseUI;
     [HideInInspector] public static bool isGameOver;
+    public bool stopAtPortal;
+    public bool stopAtStart;
+    
+    
     private GameSpeedManager gameSpeedManager;
 
     private void Start() {
         isGameOver = false;
         gameSpeedManager = GameSpeedManager.instance;
+        if (stopAtStart) {
+            gameSpeedManager.ChangeGameSpeed(0);
+        }
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
